@@ -36,17 +36,7 @@ const Propietarios = sequelize.define("propietarios", {
   telefono: {
     type: DataTypes.INTEGER,
   }
+});
 
-  // AÑADIR FK
-});
-/*
-Actividades.hasMany(Propietarios, {
-  foreignKey: "actividad_id",
-  sourceKey: "id",
-});
-PuntosInteres.hasMany(Propietarios, {
-  foreignKey: "punto_interes_id",
-  sourceKey: "id",
-});
-*/
+
 export default Propietarios;

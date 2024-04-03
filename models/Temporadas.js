@@ -3,7 +3,7 @@ import { sequelize } from "./database.js";
 import { PuntosInteres } from "./Puntos_interes.js";
 import { Actividades } from "./actividades.js";
 
-const Temporada = sequelize.define("temporada", {
+const Temporadas = sequelize.define("temporada", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -25,15 +25,5 @@ const Temporada = sequelize.define("temporada", {
 
   // AÑADIR FK
 });
-/*
-PuntosInteres.hasMany(Temporada, {
-  foreignKey: "temporada_id",
-  sourceKey: "id",
-});
 
-Actividades.hasMany(Temporada, {
-  foreignKey: "actividad_id",
-  sourceKey: "id",
-});
-*/
-export default Temporada;
+export default Temporadas;

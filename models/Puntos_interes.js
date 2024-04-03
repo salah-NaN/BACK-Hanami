@@ -10,9 +10,9 @@ const PuntosInteres = sequelize.define('puntos_interes', {
     nombre: {
         type: DataTypes.STRING
     },
-    imgs: {
-        type: DataTypes.ARRAY(DataTypes.STRING)
-    },
+    // imgs: {
+    //     type: DataTypes.ARRAY(DataTypes.STRING)
+    // },
     descripcion : {
         type: DataTypes.STRING
     },
