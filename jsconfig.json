@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "types": ["eslint"],
+    "baseUrl": ".",
+    "paths": {
+      "@models/*": ["./models/*"],
+      "@routes/*": ["./routes/*"],
+      "@controllers/*": ["./controllers/*"],
+      "@middlewares/*": ["./middlewares/*"]
+    }
+  }
+}

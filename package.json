@@ -17,5 +17,9 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.3",
     "sequelize": "^6.37.2"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.56.7",
+    "eslint": "^8.57.0"
   }
 }
