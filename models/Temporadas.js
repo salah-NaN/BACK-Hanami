@@ -1,7 +1,5 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "./database.js";
-import { PuntosInteres } from "./Puntos_interes.js";
-import { Actividades } from "./actividades.js";
 
 const Temporadas = sequelize.define("temporada", {
   id: {
@@ -10,20 +8,25 @@ const Temporadas = sequelize.define("temporada", {
     autoIncrement: true,
     allowNull: false,
   },
-  temporada: {
+  nombre: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  fecha_inicio: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  fecha_fin: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  descripcion: {
     type: DataTypes.STRING,
   },
-  fecha_1: {
-    type: DataTypes.DATE,
-  },
-  fecha_2: {
-    type: DataTypes.DATE,
-  },
-  comments: {
-    type: DataTypes.STRING,
+  punto_interes_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
-
-  // AÑADIR FK
 });
 
 export default Temporadas;

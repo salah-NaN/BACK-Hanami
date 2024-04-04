@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from './database.js';
+
 const PuntosInteres = sequelize.define('puntos_interes', {
     id: {
         type: DataTypes.INTEGER,
@@ -8,25 +9,40 @@ const PuntosInteres = sequelize.define('puntos_interes', {
         allowNull: false
     },
     nombre: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    descripcion: {
         type: DataTypes.STRING
     },
-    // imgs: {
-    //     type: DataTypes.ARRAY(DataTypes.STRING)
-    // },
-    descripcion : {
-        type: DataTypes.STRING
+    latitud: {
+        type: DataTypes.DECIMAL(10, 8),
+        allowNull: false
     },
-    ubicacion : {
-        type: DataTypes.STRING
+    longitud: {
+        type: DataTypes.DECIMAL(11, 8),
+        allowNull: false
     },
-    usuario_id : {
-        type: DataTypes.INTEGER
+    ubicacion: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
-    Tipo : {
+    poblacion: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    comarca: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    propietario_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    tipo: {
         type: DataTypes.ENUM,
-        values: ['Punto de interés', 'Sitio turístico']
+        values: ['Cerezo', 'Olivo', 'Viña', 'Lavanda']
     }
-    // AÑADIR FK
 
 })
 

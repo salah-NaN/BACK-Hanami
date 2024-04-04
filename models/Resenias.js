@@ -1,7 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "./database.js";
 
-
 const Resenias = sequelize.define("resenias", {
   id: {
     type: DataTypes.INTEGER,
@@ -9,23 +8,26 @@ const Resenias = sequelize.define("resenias", {
     autoIncrement: true,
     allowNull: false,
   },
-  user_id: {
-    type: DataTypes.INTEGER
-  },
-  puntaje: {
-    type: DataTypes.INTEGER
+  puntuacion: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   },
   resenia: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   },
   fecha: {
-    type: DataTypes.DATE
+    type: DataTypes.DATE,
+    allowNull: false
   },
   actividad_id: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  cliente_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
-
-  // AÑADIR FK
 });
 
 export default Resenias
