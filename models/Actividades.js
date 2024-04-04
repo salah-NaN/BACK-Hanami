@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "./database.js";
+import  sequelize  from "../database/database.js";
+
+console.log(sequelize)
 
 const Actividades = sequelize.define("actividades", {
   id: {

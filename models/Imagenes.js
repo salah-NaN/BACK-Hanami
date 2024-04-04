@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
-import { sequelize } from './database.js';
+import  sequelize  from "../database/database.js";
+
 
 const Imagenes = sequelize.define('imagenes', {
     id: {
@@ -16,13 +17,13 @@ const Imagenes = sequelize.define('imagenes', {
         type: DataTypes.STRING
     },
     punto_interes_id: {
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     },
     temporada_id: {
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     },
     actividad_id: {
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     }
 })
 
