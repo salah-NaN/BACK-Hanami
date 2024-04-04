@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "./database.js";
+
 const Clientes = sequelize.define("clientes", {
   id: {
     type: DataTypes.INTEGER,
@@ -9,14 +10,17 @@ const Clientes = sequelize.define("clientes", {
   },
   nombre: {
     type: DataTypes.STRING,
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
+    unique: true,
+    allowNull: false,
   },
   password: {
     type: DataTypes.STRING,
+    allowNull: false,
   }
-  // AÑADIR FK
 });
 
 export default Clientes
