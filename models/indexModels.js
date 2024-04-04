@@ -9,7 +9,7 @@ import { Imagenes } from './Imagenes'
 
 // seccion de lo que tiene el propietario
 
-    // relacion 1 a N 
+    // relacion 1 a N
     Propietarios.hasMany(Puntos_interes, { foreignKey: 'propietario_id' })
     Puntos_interes.belongsTo(Propietarios, { foreignKey: 'propietario_id' })
 
@@ -17,7 +17,7 @@ import { Imagenes } from './Imagenes'
     Puntos_interes.hasMany(Temporadas, { foreignKey: 'punto_interes_id' })
     Temporadas.belongsTo(Puntos_interes, { foreignKey: 'punto_interes_id' })
 
-    // relacion 1 a N 
+    // relacion 1 a N
     Temporadas.hasMany(Actividades, { foreignKey: 'temporada_id' })
     Actividades.belongsTo(Temporadas, { foreignKey: 'temporada_id' })
 
