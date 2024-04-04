@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "types": ["eslint"],
+    "baseUrl": ".",
+    "paths": {
+      "@models/*": ["./models/*"],
+      "@routes/*": ["./routes/*"],
+      "@controllers/*": ["./controllers/*"],
+      "@middlewares/*": ["./middlewares/*"]
+    }
+  }
+}
