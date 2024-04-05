@@ -28,6 +28,13 @@ app.use(cors({origin:'http://localhost:5173', credentials: true}))
 // rutas de todos los controladores
 app.use('/api', actividadesRoutes)
 app.use('/api', propietariosRoutes)
+app.use('/api', clientesRoutes)
+app.use('/api', puntos_interesControllers)
+app.use('/api', reseniasController)
+app.use('/api', temporadasController)
+app.use('/api', floresController)
+app.use('/api', imagenesController)
+app.use('/api', NM_Flor_Punto_interesController)
 
 // iniciar servidor
 app.listen(PORT, () => {
