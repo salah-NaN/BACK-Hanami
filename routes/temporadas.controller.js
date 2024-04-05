@@ -1,9 +1,9 @@
-import {createItem, readItems, readItem, updateItem, deleteItem} from "./generics.controllers.js";
+import { createItem, readItems, readItem, updateItem, deleteItem } from "../controllers/generics.controllers.js";
 import {Router} from "express";
 
 const router = Router();
 
-import { Temporadas } from "@models/Temporadas.js";
+import Temporadas from "../models/Temporadas.js";
 
 export default router
     .get("/temporadas", async (req, res) => await readItems(req, res, Temporadas))
