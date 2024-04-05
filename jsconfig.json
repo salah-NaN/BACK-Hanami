@@ -8,6 +8,7 @@
     "baseUrl": ".",
     "paths": {
       "@models/*": ["./models/*"],
+      "@database/*": ["./database/*"],
       "@routes/*": ["./routes/*"],
       "@controllers/*": ["./controllers/*"],
       "@middlewares/*": ["./middlewares/*"]

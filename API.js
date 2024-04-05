@@ -1,22 +1,39 @@
 
 // imports
-import { Express } from "express";
+import express from "express";
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 
+import actividadesRoutes from "./routes/actividades.routes.js";
+import propietariosRoutes from "./routes/propietarios.routes.js";
+// import clientesRoutes from "@routes/clientes.routes";
+// import propietariosRoutes from "@routes/propietarios.routes";
+// import puntos_interesControllers from "@routes/puntos_interes.controllers";
+// import reseniasController from "@routes/resenias.controller";
+// import temporadasController from "@routes/temporadas.controller";
+// import floresController from "@routes/flores.controller";
+// import imagenesController from "@routes/imagenes.controller";
+// import NM_Flor_Punto_interesController from "@routes/NM_Flor_Punto_interes.controller";
+
+
+
 // constantes
 const PORT = 3000
-const app = Express()
-// const routes = ...
+const app = express()
 
 // uses
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({origin:'http://localhost:5173', credentials: true}))
 
+// rutas de todos los controladores
+app.use('/api', actividadesRoutes)
+app.use('/api', propietariosRoutes)
 
 // iniciar servidor
-app.listen()
+app.listen(PORT, () => {
+    console.log('Server running in port 3000')
+})
 
 /* PONER CORS SI EL DOMINIO/API(PUERTOS) ES DIFERENTE */
 

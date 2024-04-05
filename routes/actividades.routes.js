@@ -1,8 +1,8 @@
-import { createItem, readItems, readItem, updateItem, deleteItem } from "@controllers/generics.controllers.js";
+import { createItem, readItems, readItem, updateItem, deleteItem } from "../controllers/generics.controllers.js";
 import { Router } from "express";
 
 const router = Router();
-import actividadesController from "@controllers/actividades.controller.js";
+import Actividades from "../models/Actividades.js";
 
 export default router
     .get("/actividades", async (req, res) => await readItems(req, res, actividadesController) )
