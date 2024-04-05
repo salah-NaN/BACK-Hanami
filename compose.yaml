@@ -1,0 +1,25 @@
+version: '3'
+services:
+    mysql:
+        image: mysql:8.0
+        container_name: mysql8
+        ports:
+            - '3308:3306'
+        expose:
+            - '3308'
+        volumes:
+            - ./data:/var/lib/mysql
+            - .:/home
+        environment:
+            MYSQL_ROOT_PASSWORD: admin
+            MYSQL_DATABASE: hanami
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin
+    adminer:
+        image: adminer:latest
+        container_name: adminer
+        environment:
+            ADMINER_DEFAULT_SERVER: mysql8
+        restart: always
+        ports:
+        - 7777:8080
