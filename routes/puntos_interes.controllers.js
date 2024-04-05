@@ -1,5 +1,5 @@
+import checkToken from "../middleware/checkToken.js";
 import { createItem, readItems, readItem, updateItem, deleteItem } from "../controllers/generics.controllers.js";
-
 import {Router} from "express";
 
 const router = Router();

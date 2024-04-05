@@ -1,6 +1,6 @@
 import { createItem, readItems, readItem, updateItem, deleteItem } from "../controllers/generics.controllers.js";
+import checkToken from "../middleware/checkToken.js";
 import {Router} from "express";
-
 const router = Router();
 
 import  Resenias  from "../models/Resenias.js";
