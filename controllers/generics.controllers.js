@@ -10,7 +10,6 @@ const createItem = async (req, res, Model) => {
 };
 
 const readItems = async (req, res, Model) => {
-  console.log(req.params.id);
   try {
     const items = await Model.findAll();
     res.json(items);
