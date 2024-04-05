@@ -4,7 +4,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 
-import actividadesRoutes from "@routes/actividades.routes";
+import actividadesRoutes from "./routes/actividades.routes.js";
+import propietariosRoutes from "./routes/propietarios.routes.js";
 // import clientesRoutes from "@routes/clientes.routes";
 // import propietariosRoutes from "@routes/propietarios.routes";
 // import puntos_interesControllers from "@routes/puntos_interes.controllers";
@@ -26,7 +27,8 @@ app.use(cookieParser())
 app.use(cors({origin:'http://localhost:5173', credentials: true}))
 
 // rutas de todos los controladores
-// app.use('/api', actividadesRoutes)
+app.use('/api', actividadesRoutes)
+app.use('/api', propietariosRoutes)
 
 // iniciar servidor
 app.listen(PORT, () => {

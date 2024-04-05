@@ -57,4 +57,4 @@ const deleteItem = async (req, res, Model) => {
   }
 };
 
-export default { createItem, readItems, readItem, updateItem, deleteItem };
+export { createItem, readItems, readItem, updateItem, deleteItem };
