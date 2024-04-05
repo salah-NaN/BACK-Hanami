@@ -6,14 +6,13 @@ import cors from 'cors'
 
 import actividadesRoutes from "./routes/actividades.routes.js";
 import propietariosRoutes from "./routes/propietarios.routes.js";
-// import clientesRoutes from "@routes/clientes.routes";
-// import propietariosRoutes from "@routes/propietarios.routes";
-// import puntos_interesControllers from "@routes/puntos_interes.controllers";
-// import reseniasController from "@routes/resenias.controller";
-// import temporadasController from "@routes/temporadas.controller";
-// import floresController from "@routes/flores.controller";
-// import imagenesController from "@routes/imagenes.controller";
-// import NM_Flor_Punto_interesController from "@routes/NM_Flor_Punto_interes.controller";
+import clientesRoutes from "./routes/clientes.routes.js";
+import puntos_interesControllers from "./routes/puntos_interes.controllers.js";
+import reseniasController from "./routes/resenias.controller.js";
+import temporadasController from "./routes/temporadas.controller.js";
+import floresController from "./routes/flores.controller.js";
+import imagenesController from "./routes/imagenes.controller.js";
+import NM_Flor_Punto_interesController from "./routes/NM_Flor_Punto_interes.controller.js";
 
 
 
