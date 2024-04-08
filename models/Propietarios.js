@@ -48,7 +48,7 @@ const Propietarios = sequelize.define("propietarios", {
     type: DataTypes.STRING
   },
   telefono: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   entidad: {
     type: DataTypes.STRING
