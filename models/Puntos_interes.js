@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
-import  sequelize  from "../database/database.js";
-
+import sequelize from "../database/database.js";
 
 const PuntosInteres = sequelize.define('puntos_interes', {
     id: {
@@ -48,3 +47,5 @@ const PuntosInteres = sequelize.define('puntos_interes', {
 })
 
 export default PuntosInteres
+
+
