@@ -1,13 +1,8 @@
-import { DataTypes } from "sequelize";
-import  sequelize  from "../database/database.js";
+import {DataTypes} from "sequelize";
+import sequelize from "../database/database.js";
+import Resenias from "./Resenias.js";
 
 const Clientes = sequelize.define("clientes", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-  },
   nombre: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -20,7 +15,7 @@ const Clientes = sequelize.define("clientes", {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
 });
 
-export default Clientes
+export default Clientes;
