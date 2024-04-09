@@ -1,13 +1,7 @@
-import { DataTypes } from "sequelize";
-import  sequelize  from "../database/database.js";
+import {DataTypes} from "sequelize";
+import sequelize from "../database/database.js";
 
 const Temporadas = sequelize.define("temporadas", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-  },
   nombre: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -25,11 +19,10 @@ const Temporadas = sequelize.define("temporadas", {
   },
   punto_interes_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
-console.log(Temporadas)
-
+console.log(Temporadas);
 
 export default Temporadas;

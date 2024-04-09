@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+import {Sequelize} from "sequelize";
 
 const sequelize = new Sequelize("hanami", "root", "admin", {
   host: "localhost",
@@ -6,26 +6,23 @@ const sequelize = new Sequelize("hanami", "root", "admin", {
   dialect: "mysql",
   define: {
     timestamps: false,
-    raw: true
-  }
-
+    raw: true,
+  },
 });
 
 async function iniDB() {
-  await sequelize.sync({ force: true });
+  await sequelize.sync({force: true});
 }
 
-// iniDB()
-
+/* iniDB(); */
 
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    console.log("Connection has been established successfully.");
   })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
   });
-
 
 export default sequelize;
