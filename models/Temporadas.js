@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import  sequelize  from "../database/database.js";
 
-const Temporadas = sequelize.define("temporada", {
+const Temporadas = sequelize.define("temporadas", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -28,5 +28,8 @@ const Temporadas = sequelize.define("temporada", {
     allowNull: false
   }
 });
+
+console.log(Temporadas)
+
 
 export default Temporadas;

@@ -17,6 +17,7 @@ async function iniDB() {
 
 // iniDB()
 
+
 sequelize
   .authenticate()
   .then(() => {
