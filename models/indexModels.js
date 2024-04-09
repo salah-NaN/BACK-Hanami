@@ -7,6 +7,10 @@ import Temporadas from './Temporadas.js'
 import Flores from './Flores.js'
 import Imagenes from './Imagenes.js'
 
+
+// este archivo de modelos no establece bien las relaciones con
+// sequelize
+
 // seccion de lo que tiene el propietario
 
     // relacion 1 a N
