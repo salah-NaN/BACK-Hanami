@@ -1,29 +1,23 @@
-import { DataTypes } from "sequelize";
-import  sequelize  from "../database/database.js";
+import {DataTypes} from "sequelize";
+import sequelize from "../database/database.js";
 
 const Propietarios = sequelize.define("propietarios", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-  },
   nombre: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   apellidos: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   tipo_documento: {
     type: DataTypes.ENUM,
@@ -39,21 +33,20 @@ const Propietarios = sequelize.define("propietarios", {
     type: DataTypes.DECIMAL(11, 8),
   },
   ubicacion: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   },
   poblacion: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   },
   comarca: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   },
   telefono: {
     type: DataTypes.STRING,
   },
   entidad: {
-    type: DataTypes.STRING
-  }
+    type: DataTypes.STRING,
+  },
 });
-
 
 export default Propietarios;
