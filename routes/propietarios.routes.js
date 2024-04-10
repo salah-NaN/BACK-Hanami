@@ -5,7 +5,8 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
-import {Router} from "express";
+import { register, login } from "../controllers/propietarios.controller.js";
+import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Propietarios from "../models/Propietarios.js";
@@ -56,55 +57,65 @@ export default router
     checkToken,
     async (req, res) => await deleteItem(req, res, Propietarios)
   )
+  .post(
+    "/register",
+    async (req, res) => await register(req, res, Propietarios)
+  )
+  .post(
+    "/login",
+    async (req, res) => await login(req, res, Propietarios, jwt, secretKey)
+  )
 
-  // register
-  .post("/propietarios/register", async (req, res) => {
-    try {
-      const {nombre, apellidos, email, password} = req.body;
-      if (!nombre || !apellidos || !email || !password) {
-        return res.status(400).json({message: "Todos los campos requeridos"});
-      }
-      const posiblePropietario = await Propietarios.findOne(
-        {where: {email}},
-        {raw: true}
-      );
-      if (posiblePropietario)
-        return res.status(400).json({message: "Usuario registrado"});
-      const propietario = await Propietarios.create(req.body);
-      if (!propietario) return res.status(404).json({message: "No encontrado"});
-      res.status(201).json(propietario);
-    } catch (error) {
-      res.status(400).json({error: error.message});
-    }
-  })
 
-  // login
-  .post("/propietarios/login", async (req, res) => {
-    try {
-      const {email, password} = req.body;
-      const propietario = await Propietarios.findOne({where: {email}});
-      if (!propietario) return res.status(404).json({error: "No encontrado"});
-      const verifyPassword = await bcrypt.compare(
-        password,
-        propietario.password
-      );
-      // error contraseña inválida
-      if (!verifyPassword)
-        return res.status(401).json({error: "Contraseña inválida"});
-      const token = jwt.sign(
-        {
-          propietario_id: propietario.id,
-          propietario_nombre: propietario.nombre,
-        },
-        secretKey,
-        {expiresIn: "2h"}
-      );
-      res.cookie("token", token, {httpOnly: false, maxAge: 7200000});
-      res.json({
-        propietario_id: propietario.id,
-        propietario_nombre: propietario.nombre,
-      });
-    } catch (error) {
-      res.status(500).json({error: error.message});
-    }
-  });
+
+// // register
+// .post("/propietarios/register", async (req, res) => {
+//   try {
+//     const {nombre, apellidos, email, password} = req.body;
+//     if (!nombre || !apellidos || !email || !password) {
+//       return res.status(400).json({message: "Todos los campos requeridos"});
+//     }
+//     const posiblePropietario = await Propietarios.findOne(
+//       {where: {email}},
+//       {raw: true}
+//     );
+//     if (posiblePropietario)
+//       return res.status(400).json({message: "Usuario registrado"});
+//     const propietario = await Propietarios.create(req.body);
+//     if (!propietario) return res.status(404).json({message: "No encontrado"});
+//     res.status(201).json(propietario);
+//   } catch (error) {
+//     res.status(400).json({error: error.message});
+//   }
+// })
+
+// // login
+// .post("/propietarios/login", async (req, res) => {
+//   try {
+//     const {email, password} = req.body;
+//     const propietario = await Propietarios.findOne({where: {email}});
+//     if (!propietario) return res.status(404).json({error: "No encontrado"});
+//     const verifyPassword = await bcrypt.compare(
+//       password,
+//       propietario.password
+//     );
+//     // error contraseña inválida
+//     if (!verifyPassword)
+//       return res.status(401).json({error: "Contraseña inválida"});
+//     const token = jwt.sign(
+//       {
+//         propietario_id: propietario.id,
+//         propietario_nombre: propietario.nombre,
+//       },
+//       secretKey,
+//       {expiresIn: "2h"}
+//     );
+//     res.cookie("token", token, {httpOnly: false, maxAge: 7200000});
+//     res.json({
+//       propietario_id: propietario.id,
+//       propietario_nombre: propietario.nombre,
+//     });
+//   } catch (error) {
+//     res.status(500).json({error: error.message});
+//   }
+// });
