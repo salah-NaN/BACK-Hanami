@@ -13,9 +13,6 @@ import Resenias from "../models/Resenias.js";
 import Clientes from "../models/Clientes.js";
 import Actividades from "../models/Actividades.js";
 
-Resenias.belongsTo(Clientes, {foreignKey: "cliente_id"});
-Resenias.belongsTo(Actividades, {foreignKey: "actividad_id"});
-
 export default router
   .get(
     "/resenias",

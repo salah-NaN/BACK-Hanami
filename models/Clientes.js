@@ -17,5 +17,7 @@ const Clientes = sequelize.define("clientes", {
     allowNull: false,
   },
 });
+Clientes.hasMany(Resenias, {foreignKey: "cliente_id"});
+Resenias.belongsTo(Clientes, {foreignKey: "cliente_id"});
 
 export default Clientes;

@@ -7,12 +7,12 @@ import cors from 'cors'
 import actividadesRoutes from "./routes/actividades.routes.js";
 import propietariosRoutes from "./routes/propietarios.routes.js";
 import clientesRoutes from "./routes/clientes.routes.js";
-import puntos_interesControllers from "./routes/puntos_interes.controllers.js";
+import puntos_interesControllers from "./routes/puntos_interes.routes.js";
 import reseniasController from "./routes/resenias.controller.js";
 import temporadasController from "./routes/temporadas.controller.js";
-import floresController from "./routes/flores.controller.js";
-import imagenesController from "./routes/imagenes.controller.js";
-import NM_Flor_Punto_interesController from "./routes/NM_Flor_Punto_interes.controller.js";
+import floresController from "./routes/flores.routes.js";
+import imagenesController from "./routes/imagenes.routes.js";
+import NM_Flor_Punto_interesController from "./routes/NM_Flor_Punto_interes.routes.js";
 
 
 

@@ -15,9 +15,7 @@ import PuntosInteres from "../models/Puntos_interes.js";
 import Temporadas from "../models/Temporadas.js";
 import Actividades from "../models/Actividades.js";
 
-Imagenes.belongsTo(PuntosInteres, {foreignKey: "punto_interes_id"});
-Imagenes.belongsTo(Temporadas, {foreignKey: "temporada_id"});
-Imagenes.belongsTo(Actividades, {foreignKey: "actividad_id"});
+
 export default router
   .get(
     "/imagenes",

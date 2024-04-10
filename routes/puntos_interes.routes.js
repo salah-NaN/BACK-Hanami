@@ -18,23 +18,7 @@ import Propietarios from "../models/Propietarios.js";
 import Imagenes from "../models/Imagenes.js";
 import Flores from "../models/Flores.js";
 
-PuntosInteres.belongsTo(Propietarios, {foreignKey: "propietario_id"});
-PuntosInteres.hasMany(Temporadas, {
-  foreignKey: "punto_interes_id",
-  onDelete: "CASCADE",
-  hooks: true,
-});
-PuntosInteres.hasMany(Imagenes, {
-  foreignKey: "punto_interes_id",
-  onDelete: "CASCADE",
-  hooks: true,
-});
-PuntosInteres.belongsToMany(Flores, {
-  through: "NM_Flor_Punto_interes",
-  foreignKey: "punto_interes_id",
-  onDelete: "CASCADE",
-  hooks: true,
-});
+
 
 export default router
   .get(

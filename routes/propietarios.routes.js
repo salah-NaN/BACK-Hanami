@@ -16,13 +16,6 @@ import PuntosInteres from "../models/Puntos_interes.js";
 const router = Router();
 const secretKey = "esto_es_la_leche_de_creativo";
 
-// funciones añadidas
-Propietarios.hasMany(PuntosInteres, {
-  foreignKey: "propietario_id",
-  onDelete: "CASCADE",
-  hooks: true,
-});
-
 // Al tener un register, he de hacer un beforeCreate para encriptar la
 // contraseña
 Propietarios.beforeCreate(async (propietario) => {
