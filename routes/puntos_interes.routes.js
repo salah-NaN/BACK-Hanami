@@ -6,6 +6,7 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
+import {todos_puntos_interes} from '../controllers/puntos_interes.controllers.js'
 import {Router} from "express";
 
 const router = Router();
@@ -45,6 +46,11 @@ export default router
     checkToken,
     async (req, res) => await deleteItem(req, res, PuntosInteres)
   )
+  .get(
+    "/todos_puntos_interes",
+    async (req, res) => await todos_puntos_interes(req, res, PuntosInteres, Temporadas)
+  )
+
 
   /*
     Endpoint para poder sacar todos los puntos de interés y todas sus temporadas 
@@ -66,26 +72,26 @@ export default router
   //     }
   // })
 
-  .get("/todos_puntos_interes", async (req, res) => {
-    try {
-      const puntos_interes = await PuntosInteres.findAll({
-        // where: {id: 3} // Incluye todas las temporadas asociadas a los puntos de interés
-        include: [
-          {
-            model: Temporadas,
-            required: false,
-          },
-        ],
-      });
+  // .get("/todos_puntos_interes", async (req, res) => {
+  //   try {
+  //     const puntos_interes = await PuntosInteres.findAll({
+  //       // where: {id: 3} // Incluye todas las temporadas asociadas a los puntos de interés
+  //       include: [
+  //         {
+  //           model: Temporadas,
+  //           required: false,
+  //         },
+  //       ],
+  //     });
 
-      if (!puntos_interes) {
-        return res
-          .status(404)
-          .json({message: "No se encontraron puntos de interés"});
-      }
+  //     if (!puntos_interes) {
+  //       return res
+  //         .status(404)
+  //         .json({message: "No se encontraron puntos de interés"});
+  //     }
 
-      res.status(200).json(puntos_interes);
-    } catch (error) {
-      res.status(400).json({error: error.message});
-    }
-  });
+  //     res.status(200).json(puntos_interes);
+  //   } catch (error) {
+  //     res.status(400).json({error: error.message});
+  //   }
+  // });
