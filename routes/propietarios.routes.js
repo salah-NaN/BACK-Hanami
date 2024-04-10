@@ -5,7 +5,7 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
-import { register, login } from "../controllers/propietarios.controller.js";
+import { register, login } from "../controllers/auth.controllers.js";
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";

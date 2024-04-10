@@ -7,7 +7,7 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
-import {register, login} from "../controllers/clientes.controllers.js";
+import {register, login} from "../controllers/auth.controllers.js";
 
 // imports dependencias
 

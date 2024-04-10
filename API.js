@@ -7,12 +7,12 @@ import cors from 'cors'
 import actividadesRoutes from "./routes/actividades.routes.js";
 import propietariosRoutes from "./routes/propietarios.routes.js";
 import clientesRoutes from "./routes/clientes.routes.js";
-import puntos_interesControllers from "./routes/puntos_interes.routes.js";
-import reseniasController from "./routes/resenias.controller.js";
-import temporadasController from "./routes/temporadas.controller.js";
-import floresController from "./routes/flores.routes.js";
-import imagenesController from "./routes/imagenes.routes.js";
-import NM_Flor_Punto_interesController from "./routes/NM_Flor_Punto_interes.routes.js";
+import puntos_interesRoutes from "./routes/puntos_interes.routes.js";
+import reseniasRoutes from "./routes/resenias.routes.js";
+import temporadasRoutes from "./routes/temporadas.routes.js";
+import floresRoutes from "./routes/flores.routes.js";
+import imagenesRoutes from "./routes/imagenes.routes.js";
+import NM_Flor_Punto_interesRoutes from "./routes/NM_Flor_Punto_interes.routes.js";
 
 
 
@@ -29,12 +29,12 @@ app.use(cors({origin:'http://localhost:5173', credentials: true}))
 app.use('/api', actividadesRoutes)
 app.use('/api', propietariosRoutes)
 app.use('/api', clientesRoutes)
-app.use('/api', puntos_interesControllers)
-app.use('/api', reseniasController)
-app.use('/api', temporadasController)
-app.use('/api', floresController)
-app.use('/api', imagenesController)
-app.use('/api', NM_Flor_Punto_interesController)
+app.use('/api', puntos_interesRoutes)
+app.use('/api', reseniasRoutes)
+app.use('/api', temporadasRoutes)
+app.use('/api', floresRoutes)
+app.use('/api', imagenesRoutes)
+app.use('/api', NM_Flor_Punto_interesRoutes)
 
 // iniciar servidor
 app.listen(PORT, () => {
