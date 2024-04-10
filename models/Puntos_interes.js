@@ -1,6 +1,11 @@
 import {DataTypes} from "sequelize";
 import sequelize from "../database/database.js";
 
+import Propietarios from "./Propietarios.js";
+import Imagenes from "./Imagenes.js";
+import Temporadas from "./Temporadas.js";
+
+
 const PuntosInteres = sequelize.define("puntos_interes", {
   nombre: {
     type: DataTypes.STRING,
@@ -39,4 +44,8 @@ const PuntosInteres = sequelize.define("puntos_interes", {
   },
 });
 
+Propietarios.hasMany(PuntosInteres, {
+  foreignKey: "punto_interes_id",
+  sourceKey: "id",
+});
 export default PuntosInteres;

@@ -15,20 +15,7 @@ import Actividades from "../models/Actividades.js";
 import PuntosInteres from "../models/Puntos_interes.js";
 import Imagenes from "../models/Imagenes.js";
 
-Temporadas.hasMany(Actividades, {
-  foreignKey: "temporada_id",
-  onDelete: "CASCADE",
-  hooks: true,
-});
-Temporadas.belongsTo(PuntosInteres, {
-  foreignKey: "punto_interes_id",
-  sourceKey: "id",
-});
-Temporadas.hasMany(Imagenes, {
-  foreignKey: "temporada_id",
-  onDelete: "CASCADE",
-  hooks: true,
-});
+
 export default router
   .get("/temporadas", async (req, res) => await readItems(req, res, Temporadas))
   .get(

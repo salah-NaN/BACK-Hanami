@@ -14,5 +14,14 @@ const Flores = sequelize.define("flores", {
     type: DataTypes.STRING,
   },
 });
-
+Flores.belongsToMany(PuntosInteres, {
+  through: "NM_Flor_Punto_interes",
+  foreignKey: "flor_id",
+});
+PuntosInteres.belongsToMany(Flores, {
+  through: "NM_Flor_Punto_interes",
+  foreignKey: "punto_interes_id",
+  onDelete: "CASCADE",
+  hooks: true,
+});
 export default Flores;

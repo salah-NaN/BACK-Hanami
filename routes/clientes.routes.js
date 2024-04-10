@@ -17,7 +17,6 @@ const router = Router();
 const secretKey = "esto_es_la_leche_de_creativo";
 
 // funciones añadidas
-Clientes.hasMany(Resenias, {foreignKey: "cliente_id"});
 
 // Al tener un register, he de hacer un beforeCreate para encriptar la
 // contraseña
