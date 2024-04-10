@@ -1,5 +1,7 @@
 import {DataTypes} from "sequelize";
 import sequelize from "../database/database.js";
+import PuntosInteres from "./Puntos_interes.js";
+
 
 const Propietarios = sequelize.define("propietarios", {
   nombre: {
@@ -46,7 +48,7 @@ const Propietarios = sequelize.define("propietarios", {
   },
   entidad: {
     type: DataTypes.STRING,
-  },
+  }
 });
 
 export default Propietarios;

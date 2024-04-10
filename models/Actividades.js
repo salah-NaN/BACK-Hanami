@@ -42,5 +42,23 @@ const Actividades = sequelize.define("actividades", {
     allowNull: false,
   },
 });
+Actividades.belongsTo(Temporadas, {foreignKey: "temporada_id"});
+Imagenes.hasMany(Actividades, {
+  foreignKey: "actividad_id",
+  onDelete: "CASCADE",
+  hooks: true,
+});
+Temporadas.hasMany(Actividades, {
+  foreignKey: "temporada_id",
+  onDelete: "CASCADE",
+  hooks: true,
+});
+Resenias.belongsTo(Actividades, {foreignKey: "actividad_id"});
+
+Resenias.hasMany(Actividades, {
+  foreignKey: "actividad_id",
+  onDelete: "CASCADE",
+  hooks: true,
+});
 
 export default Actividades;

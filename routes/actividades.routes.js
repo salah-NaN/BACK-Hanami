@@ -14,17 +14,6 @@ import Imagenes from "../models/Imagenes.js";
 import Resenias from "../models/Resenias.js";
 
 const router = Router();
-Actividades.belongsTo(Temporadas, {foreignKey: "temporada_id"});
-Actividades.hasMany(Imagenes, {
-  foreignKey: "actividad_id",
-  onDelete: "CASCADE",
-  hooks: true,
-});
-Actividades.hasMany(Resenias, {
-  foreignKey: "actividad_id",
-  onDelete: "CASCADE",
-  hooks: true,
-});
 
 export default router
   .get(
