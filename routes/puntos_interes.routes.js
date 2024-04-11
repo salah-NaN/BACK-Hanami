@@ -17,6 +17,7 @@ import Temporadas from "../models/Temporadas.js";
 import Propietarios from "../models/Propietarios.js";
 import Imagenes from "../models/Imagenes.js";
 import Flores from "../models/Flores.js";
+import Resenias from "../models/Resenias.js";
 import {Op} from "sequelize";
 
 export default router
