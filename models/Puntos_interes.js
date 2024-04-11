@@ -48,4 +48,7 @@ Propietarios.hasMany(PuntosInteres, {
   foreignKey: "punto_interes_id",
   sourceKey: "id",
 });
+
+
+
 export default PuntosInteres;

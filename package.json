@@ -17,7 +17,8 @@
     "es6": "^0.0.7",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.9.3"
+    "mysql2": "^3.9.3",
+    "nodemon": "^3.1.0"
   },
   "devDependencies": {
     "@types/eslint": "^8.56.7",
