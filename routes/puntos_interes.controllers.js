@@ -16,6 +16,7 @@ import Temporadas from "../models/Temporadas.js";
 import Propietarios from "../models/Propietarios.js";
 import Imagenes from "../models/Imagenes.js";
 import Flores from "../models/Flores.js";
+import {Op} from "sequelize";
 
 PuntosInteres.belongsTo(Propietarios, {foreignKey: "propietario_id"});
 PuntosInteres.hasMany(Temporadas, {
@@ -101,6 +102,42 @@ export default router
       }
 
       res.status(200).json(puntos_interes);
+    } catch (error) {
+      res.status(400).json({error: error.message});
+    }
+  })
+
+  .get("/puntos_interes/:poblacion/:fecha/:flor", async (req, res) => {
+    try {
+      const poblacion =
+        req.params.poblacion !== ";" ? req.params.poblacion : "%";
+      const fecha = req.params.fecha !== ";" ? req.params.fecha : new Date();
+      const flor = req.params.flor !== ";" ? req.params.flor : "%";
+
+      const puntos_interes_buscador = await PuntosInteres.findAll({
+        where: {poblacion: {[Op.like]: poblacion}, tipo: {[Op.like]: flor}},
+        include: [
+          {
+            model: Temporadas,
+            required: true,
+            where: {
+              fecha_inicio: {[Op.lte]: fecha},
+              fecha_fin: {[Op.gte]: fecha},
+            },
+          },
+          /*             {
+              model: Flores,
+              required: false,
+              where: {especie: flor},
+            }, */
+        ],
+      });
+      if (!puntos_interes_buscador) {
+        return res
+          .status(404)
+          .json({message: "No se encontraron puntos de interés"});
+      }
+      res.status(200).json(puntos_interes_buscador);
     } catch (error) {
       res.status(400).json({error: error.message});
     }

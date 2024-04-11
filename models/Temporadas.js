@@ -23,6 +23,4 @@ const Temporadas = sequelize.define("temporadas", {
   },
 });
 
-console.log(Temporadas);
-
 export default Temporadas;
