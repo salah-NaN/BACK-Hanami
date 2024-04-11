@@ -26,15 +26,4 @@ const Temporadas = sequelize.define("temporadas", {
   },
 });
 
-PuntosInteres.hasMany(Temporadas, {
-  foreignKey: "punto_interes_id",
-  onDelete: "CASCADE",
-  hooks: true,
-});
-Temporadas.hasMany(Imagenes, {
-  foreignKey: "temporada_id",
-  onDelete: "CASCADE",
-  hooks: true,
-});
-
 export default Temporadas;
