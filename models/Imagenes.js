@@ -22,5 +22,11 @@ const Imagenes = sequelize.define("imagenes", {
     type: DataTypes.INTEGER,
   },
 });
+Imagenes.belongsTo(PuntosInteres, {foreignKey: "punto_interes_id"});
+PuntosInteres.hasMany(Imagenes, {
+  foreignKey: "punto_interes_id",
+  onDelete: "CASCADE",
+  hooks: true,
+});
 
 export default Imagenes;

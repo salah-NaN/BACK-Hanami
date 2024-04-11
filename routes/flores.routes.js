@@ -13,10 +13,6 @@ const router = Router();
 import Flores from "../models/Flores.js";
 import PuntosInteres from "../models/Puntos_interes.js";
 
-Flores.belongsToMany(PuntosInteres, {
-  through: "NM_Flor_Punto_interes",
-  foreignKey: "flor_id",
-});
 
 export default router
   .get(

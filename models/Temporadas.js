@@ -1,5 +1,8 @@
 import {DataTypes} from "sequelize";
 import sequelize from "../database/database.js";
+import Actividades from "./Actividades.js";
+import Imagenes from "./Imagenes.js";
+import PuntosInteres from "./Puntos_interes.js";
 
 const Temporadas = sequelize.define("temporadas", {
   nombre: {
