@@ -3,8 +3,9 @@ import bcrypt from "bcrypt";
 const registerPropietario = async (req, res, Model) => {
   try {
     console.log(req.body);
-    const {nombre, email, password, tipoDocumento, numDocumento, latitud, longitud,ubicacion, poblacion, comarca} = req.body;
-    if (!nombre || !email || !password || !tipoDocumento || !numDocumento || !latitud || !longitud || !ubicacion || !poblacion || ! comarca) {
+    const {nombre, email, password, tipoDocumento, documento, latitud, longitud,ubicacion, poblacion, comarca} = req.body;
+    if (!nombre || !email || !password || !tipoDocumento || !documento || !latitud || !longitud || !ubicacion || !poblacion || !comarca) {
+      console.log();
       return res.status(400).json({message: "Todos los campos requeridos"});
     }
     const posiblePropietario = await Model.findOne(
