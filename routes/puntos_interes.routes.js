@@ -6,7 +6,7 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
-import {todos_puntos_interes} from "../controllers/puntos_interes.controllers.js";
+import {puntos_interes_propietarios, todos_puntos_interes} from "../controllers/puntos_interes.controllers.js";
 import {Router} from "express";
 
 const router = Router();
@@ -51,7 +51,9 @@ export default router
     async (req, res) =>
       await todos_puntos_interes(req, res, PuntosInteres, Temporadas)
   )
-
+  .get (
+    "/puntos_interes_propietarios/:id", async (req, res) => await puntos_interes_propietarios(req, res, PuntosInteres, Propietarios)
+  )
   /*
     Endpoint para poder sacar todos los puntos de interés y todas sus temporadas 
     asociadas

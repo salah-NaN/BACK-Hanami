@@ -23,9 +23,10 @@ const todos_puntos_interes = async (req, res, Model, Temporadas) => {
 };
 
 const puntos_interes_propietarios = async (req, res, Model, Propietarios) => {
+  console.log("req.params === ",req.params);
   try {
     const puntos_interes = await Model.findAll({
-      where: { id: req.params.id },
+      where: { propietario_id: req.params.id },
       include: [
         {
           model: Propietarios,

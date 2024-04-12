@@ -24,6 +24,10 @@ const Temporadas = sequelize.define("temporadas", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  flor_id: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  }
 });
 
 PuntosInteres.hasMany(Temporadas, {   foreignKey: "punto_interes_id",   onDelete: "CASCADE",   hooks: true, })
