@@ -6,7 +6,7 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
-import {todos_puntos_interes} from "../controllers/puntos_interes.controllers.js";
+import {todos_puntos_interes, punto_interes_page} from "../controllers/puntos_interes.controllers.js";
 import {Router} from "express";
 
 const router = Router();
@@ -17,6 +17,7 @@ import Temporadas from "../models/Temporadas.js";
 import Propietarios from "../models/Propietarios.js";
 import Imagenes from "../models/Imagenes.js";
 import Flores from "../models/Flores.js";
+import Actividades from "../models/Actividades.js";
 import Resenias from "../models/Resenias.js";
 import {Op} from "sequelize";
 
@@ -50,6 +51,11 @@ export default router
     "/todos_puntos_interes",
     async (req, res) =>
       await todos_puntos_interes(req, res, PuntosInteres, Temporadas)
+  )
+  .get(
+    "/punto_interes_page/:id",
+    async (req, res) =>
+      await punto_interes_page(req, res, PuntosInteres, Propietarios, Temporadas, Actividades, Imagenes, Flores)
   )
 
   /*
