@@ -45,9 +45,5 @@ Propietarios.hasMany(PuntosInteres, {
   sourceKey: "id",
 });
 
-PuntosInteres.belongsTo(Propietarios, {
-  foreignKey: "propietario_id",
-})
-
 
 export default PuntosInteres;
