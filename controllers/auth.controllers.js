@@ -1,5 +1,26 @@
 import bcrypt from "bcrypt";
 
+const registerPropietario = async (req, res, Model) => {
+  try {
+    console.log(req.body);
+    const {nombre, email, password, tipoDocumento, numDocumento, latitud, longitud,ubicacion, poblacion, comarca} = req.body;
+    if (!nombre || !email || !password || !tipoDocumento || !numDocumento || !latitud || !longitud || !ubicacion || !poblacion || ! comarca) {
+      return res.status(400).json({message: "Todos los campos requeridos"});
+    }
+    const posiblePropietario = await Model.findOne(
+      {where: {email}},
+      {raw: true}
+    );
+    if (posiblePropietario)
+      return res.status(400).json({message: "Usuario registrado"});
+    const propietario = await Model.create(req.body);
+    if (!propietario) return res.status(404).json({message: "No encontrado"});
+    res.status(201).json(propietario);
+    } catch (error) {
+    res.status(400).json({error: error.message});
+    }
+}
+
 const register = async (req, res, Model) => {
     try {
         const {nombre, email, password} = req.body;
@@ -41,4 +62,4 @@ const login = async (req, res, Model, jwt, secretKey) => {
       }
 }
 
-export {register, login}
+export {register, login, registerPropietario}

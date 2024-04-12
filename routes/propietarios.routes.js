@@ -5,7 +5,7 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
-import { register, login } from "../controllers/auth.controllers.js";
+import { registerPropietario, login } from "../controllers/auth.controllers.js";
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -52,7 +52,7 @@ export default router
   )
   .post(
     "/register",
-    async (req, res) => await register(req, res, Propietarios)
+    async (req, res) => await registerPropietario(req, res, Propietarios)
   )
   .post(
     "/login",
