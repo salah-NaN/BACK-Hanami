@@ -13,7 +13,6 @@ import temporadasRoutes from "./routes/temporadas.routes.js";
 import floresRoutes from "./routes/flores.routes.js";
 import imagenesRoutes from "./routes/imagenes.routes.js";
 import NM_Flor_Punto_interesRoutes from "./routes/NM_Flor_Punto_interes.routes.js";
-import path from 'path'
 
 
 // constantes
