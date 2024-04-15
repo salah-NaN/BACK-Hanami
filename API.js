@@ -13,7 +13,7 @@ import temporadasRoutes from "./routes/temporadas.routes.js";
 import floresRoutes from "./routes/flores.routes.js";
 import imagenesRoutes from "./routes/imagenes.routes.js";
 import NM_Flor_Punto_interesRoutes from "./routes/NM_Flor_Punto_interes.routes.js";
-
+import path from 'path'
 
 
 // constantes
@@ -23,7 +23,10 @@ const app = express()
 // uses
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({origin:'http://localhost:5173', credentials: true}))
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
+    // servir imágenes
+    app.use("/img", express.static('public'));
+
 
 // rutas de todos los controladores
 app.use('/api', actividadesRoutes)
