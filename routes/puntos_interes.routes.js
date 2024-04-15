@@ -54,6 +54,7 @@ export default router
   .get (
     "/puntos_interes_propietarios/:id", async (req, res) => await puntos_interes_propietarios(req, res, PuntosInteres, Propietarios)
   )
+  // Hacer merge
   /*
     Endpoint para poder sacar todos los puntos de interés y todas sus temporadas 
     asociadas
