@@ -10,7 +10,6 @@ import checkToken from "../middleware/checkToken.js";
 
 const router = Router();
 
-// app.use("/img", express.static(__dirname + `/uploads/resize`));
 
 import Imagenes from "../models/Imagenes.js";
 import PuntosInteres from "../models/Puntos_interes.js";
