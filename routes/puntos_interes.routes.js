@@ -6,7 +6,7 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
-import {todos_puntos_interes, puntos_interes_buscador, actividades_buscador} from "../controllers/puntos_interes.controllers.js";
+import {todos_puntos_interes, puntos_interes_buscador, punto_interes_page} from "../controllers/puntos_interes.controllers.js";
 import {Router} from "express";
 
 const router = Router();
@@ -64,17 +64,17 @@ export default router
     async (req, res) =>
       await punto_interes_page(req, res, PuntosInteres, Propietarios, Temporadas, Actividades, Imagenes, Flores)
   )
-  .get(
-    "/actividades/:poblacion/:fecha/:flor",
-    async (req, res) =>
-      await actividades_buscador(
-        req,
-        res,
-        Actividades,
-        Temporadas,
-        PuntosInteres
-      )
-  );
+  // .get(
+  //   "/actividades/:poblacion/:fecha/:flor",
+  //   async (req, res) =>
+  //     await actividades_buscador(
+  //       req,
+  //       res,
+  //       Actividades,
+  //       Temporadas,
+  //       PuntosInteres
+  //     )
+  // );
 /*
     Endpoint para poder sacar todos los puntos de interés y todas sus temporadas 
     asociadas
