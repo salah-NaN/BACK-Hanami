@@ -3,8 +3,10 @@ import bcrypt from "bcrypt";
 const registerPropietario = async (req, res, Model) => {
   try {
     console.log(req.body);
-    const {nombre, email, password, tipoDocumento, numDocumento, latitud, longitud,ubicacion, poblacion, comarca} = req.body;
-    if (!nombre || !email || !password || !tipoDocumento || !numDocumento || !latitud || !longitud || !ubicacion || !poblacion || ! comarca) {
+    const {nombre, apellidos, email, password, tipo_documento, num_doc, latitud, longitud,ubicacion, poblacion, comarca, telefono, entidad} = req.body;
+    if (!nombre || !apellidos || !email || !password || !tipo_documento || !num_doc || !latitud 
+        || !longitud || !ubicacion || !poblacion || !comarca || !telefono || !entidad ) {
+      console.log();
       return res.status(400).json({message: "Todos los campos requeridos"});
     }
     const posiblePropietario = await Model.findOne(
@@ -13,7 +15,22 @@ const registerPropietario = async (req, res, Model) => {
     );
     if (posiblePropietario)
       return res.status(400).json({message: "Usuario registrado"});
-    const propietario = await Model.create(req.body);
+    const propietario = await Model.create({
+      nombre,
+      apellidos,
+      email,
+      password,
+      tipo_documento,
+      num_doc,
+      latitud,
+      longitud,
+      ubicacion,
+      poblacion,
+      comarca,
+      telefono,
+      entidad
+    });
+    
     if (!propietario) return res.status(404).json({message: "No encontrado"});
     res.status(201).json(propietario);
     } catch (error) {

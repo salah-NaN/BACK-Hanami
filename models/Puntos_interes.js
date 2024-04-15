@@ -37,18 +37,13 @@ const PuntosInteres = sequelize.define("puntos_interes", {
   propietario_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  },
-  tipo: {
-    type: DataTypes.ENUM,
-    values: ["Cerezo", "Olivo", "Viña", "Lavanda"],
-  },
+  }
 });
 
 Propietarios.hasMany(PuntosInteres, {
   foreignKey: "punto_interes_id",
   sourceKey: "id",
 });
-
 
 
 export default PuntosInteres;
