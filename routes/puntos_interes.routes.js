@@ -6,7 +6,11 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
-import {todos_puntos_interes, puntos_interes_buscador, punto_interes_page} from "../controllers/puntos_interes.controllers.js";
+import {
+  todos_puntos_interes,
+  puntos_interes_buscador,
+  punto_interes_page,
+} from "../controllers/puntos_interes.controllers.js";
 import {Router} from "express";
 
 const router = Router();
@@ -49,32 +53,43 @@ export default router
   .get(
     "/todos_puntos_interes",
     async (req, res) =>
-      await todos_puntos_interes(req, res, PuntosInteres, Temporadas)
+      await todos_puntos_interes(req, res, PuntosInteres, Temporadas, Flores)
   )
   .get(
     "/puntos_interes/:poblacion/:fecha/:flor",
     async (req, res) =>
-      await puntos_interes_buscador(req, res, PuntosInteres, Temporadas)
+      await puntos_interes_buscador(req, res, PuntosInteres, Temporadas, Flores)
   )
-  .get (
-    "/puntos_interes_propietarios/:id", async (req, res) => await puntos_interes_propietarios(req, res, PuntosInteres, Propietarios)
+  .get(
+    "/puntos_interes_propietarios/:id",
+    async (req, res) =>
+      await puntos_interes_propietarios(req, res, PuntosInteres, Propietarios)
   )
   .get(
     "/punto_interes_page/:id",
     async (req, res) =>
-      await punto_interes_page(req, res, PuntosInteres, Propietarios, Temporadas, Actividades, Imagenes, Flores)
-  )
-  // .get(
-  //   "/actividades/:poblacion/:fecha/:flor",
-  //   async (req, res) =>
-  //     await actividades_buscador(
-  //       req,
-  //       res,
-  //       Actividades,
-  //       Temporadas,
-  //       PuntosInteres
-  //     )
-  // );
+      await punto_interes_page(
+        req,
+        res,
+        PuntosInteres,
+        Propietarios,
+        Temporadas,
+        Actividades,
+        Imagenes,
+        Flores
+      )
+  );
+// .get(
+//   "/actividades/:poblacion/:fecha/:flor",
+//   async (req, res) =>
+//     await actividades_buscador(
+//       req,
+//       res,
+//       Actividades,
+//       Temporadas,
+//       PuntosInteres
+//     )
+// );
 /*
     Endpoint para poder sacar todos los puntos de interés y todas sus temporadas 
     asociadas
