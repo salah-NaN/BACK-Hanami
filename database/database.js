@@ -14,8 +14,8 @@ async function iniDB() {
   await sequelize.sync({force: true});
 }
 
-/* iniDB();
- */
+iniDB();
+ 
 sequelize
   .authenticate()
   .then(() => {
@@ -26,3 +26,7 @@ sequelize
   });
 
 export default sequelize;
+
+// Reseñas con actividades
+//  Actividades controllers actividad_page
+// endpoint get actividad_page/:id

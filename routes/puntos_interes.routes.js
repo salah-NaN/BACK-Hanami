@@ -10,6 +10,7 @@ import {
   todos_puntos_interes,
   puntos_interes_buscador,
   punto_interes_page,
+  puntos_interes_propietarios,
 } from "../controllers/puntos_interes.controllers.js";
 import {Router} from "express";
 

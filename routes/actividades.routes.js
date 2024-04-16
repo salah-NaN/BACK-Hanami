@@ -5,6 +5,7 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
+import {actividad_page} from "../controllers/actividades.controllers.js";
 import {Router} from "express";
 import checkToken from "../middleware/checkToken.js";
 
@@ -12,6 +13,7 @@ import Actividades from "../models/Actividades.js";
 import Temporadas from "../models/Temporadas.js";
 import Imagenes from "../models/Imagenes.js";
 import Resenias from "../models/Resenias.js";
+import PuntosInteres from "../models/Puntos_interes.js";
 
 const router = Router();
 
@@ -40,4 +42,8 @@ export default router
     "/actividades/:id",
     checkToken,
     async (req, res) => await deleteItem(req, res, Actividades)
+  )
+  .get(
+    "/actividad_page/:id",
+    async (req, res) => await actividad_page(req, res, Actividades, Temporadas, PuntosInteres, Imagenes, Resenias)
   );

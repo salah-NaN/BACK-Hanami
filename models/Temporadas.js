@@ -30,12 +30,15 @@ const Temporadas = sequelize.define("temporadas", {
   },
 });
 
+// Relacion entre PuntosInteres y Temporadas
+
 PuntosInteres.hasMany(Temporadas, {
-  foreignKey: "punto_interes_id",
+  foreignKey: "puntos_interes_id",
   onDelete: "CASCADE",
   hooks: true,
 });
-Temporadas.belongsTo(PuntosInteres, {foreignKey: "id"});
+
+// Relacion entre Temporadas y Imagenes
 
 Temporadas.hasMany(Imagenes, {
   foreignKey: "temporada_id",

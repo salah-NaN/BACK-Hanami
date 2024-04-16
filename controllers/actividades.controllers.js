@@ -46,5 +46,49 @@ const actividades_buscador = async (
     res.status(400).json({error: error.message});
   }
 };
+const actividad_page = async (
+  req,
+  res,
+  Model,
+  Temporadas,
+  PuntosInteres,
+  Imagenes,
+  Resenias
+) => {
+  try {
+    const { id } = req.params
+    const actividad = await Model.findByPk(id, {
+      include: [
+        {
+          model: Temporadas,
+          include: [
+            {
+              model: PuntosInteres
+            }
+          ]
+        },
+        {
+          model: Resenias
+        }
 
-export {actividades_buscador};
+        // {
+        //   model: Imagenes
+        // }
+      ]
+    })
+
+    if (!actividad) {
+      return res.status(404).json({ message: "No se encontraron actividades" });
+    }
+    //codigo de prueba, es borrable
+    // const actividad_sola = await Model.findByPk(id)
+    // if (!actividad_sola) {
+    //   return res.status(404).json({ message: "No se encontraron actividades" });
+    // }
+    // const resenias = await actividad_sola.get
+    res.status(200).json(actividad);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+export {actividades_buscador, actividad_page};
