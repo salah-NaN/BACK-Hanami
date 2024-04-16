@@ -45,15 +45,17 @@ Actividades.hasMany(Imagenes, {
   sourceKey: "id",
 });
 Temporadas.hasMany(Actividades, {
-  foreignKey: "temporadas_id",
+  foreignKey: "temporada_id",
   onDelete: "CASCADE",
   hooks: true,
 
 });
 
-
-
-Actividades.belongsTo(Resenias, {foreignKey: "resenias_id"});
+Actividades.hasMany(Resenias, {
+  foreignKey: "actividad_id",
+  onDelete: "CASCADE",
+  hooks: true,
+})
 
 
 export default Actividades;
