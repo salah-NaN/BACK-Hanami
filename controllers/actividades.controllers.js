@@ -1,4 +1,3 @@
-
 import { Op, where } from "sequelize";
 
 const actividades_buscador = async (
@@ -47,31 +46,6 @@ const actividades_buscador = async (
     res.status(400).json({ error: error.message });
   }
 };
-const actividad_page = async (
-  req,
-  res,
-  Model,
-  Temporadas,
-  PuntosInteres,
-  Imagenes,
-  Resenias
-) => {
-  try {
-    const { id } = req.params
-    const actividad = await Model.findByPk(id, {
-      include: [
-        {
-          model: Temporadas,
-          include: [
-            {
-              model: PuntosInteres
-            }
-          ]
-        },
-        {
-          model: Resenias
-        }
-
 
 // endpoint dedicado a la página de una actividad específica
 const actividad_page = async (
@@ -118,4 +92,5 @@ const actividad_page = async (
     res.status(400).json({ error: error.message });
   }
 }
+
 export {actividades_buscador, actividad_page};

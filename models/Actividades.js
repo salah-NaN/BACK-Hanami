@@ -38,12 +38,14 @@ const Actividades = sequelize.define("actividades", {
     allowNull: false,
   },
 });
+
 Actividades.hasMany(Imagenes, {
   foreignKey: "actividad_id",
   onDelete: "CASCADE",
   hooks: true,
   sourceKey: "id",
 });
+
 Temporadas.hasMany(Actividades, {
   foreignKey: "temporada_id",
   onDelete: "CASCADE",
