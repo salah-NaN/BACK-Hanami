@@ -27,7 +27,7 @@ const Temporadas = sequelize.define("temporadas", {
   flor_id: {
     type: DataTypes.INTEGER,
     allowNull: true,
-  }
+  },
 });
 
 PuntosInteres.hasMany(Temporadas, {
@@ -35,7 +35,7 @@ PuntosInteres.hasMany(Temporadas, {
   onDelete: "CASCADE",
   hooks: true,
 });
-Temporadas.belongsTo(PuntosInteres, {foreignKey: "punto_interes_id"});
+Temporadas.belongsTo(PuntosInteres, {foreignKey: "id"});
 
 Temporadas.hasMany(Imagenes, {
   foreignKey: "temporada_id",

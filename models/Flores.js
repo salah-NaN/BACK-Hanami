@@ -19,6 +19,8 @@ const Flores = sequelize.define("flores", {
 Flores.hasMany(Temporadas, {
   foreignKey: "flor_id",
   sourceKey: "id",
-})
+});
+Temporadas.belongsTo(Flores, {
+  foreignKey: "flor_id",
+});
 export default Flores;
- 
