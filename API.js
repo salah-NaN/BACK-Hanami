@@ -12,7 +12,6 @@ import reseniasRoutes from "./routes/resenias.routes.js";
 import temporadasRoutes from "./routes/temporadas.routes.js";
 import floresRoutes from "./routes/flores.routes.js";
 import imagenesRoutes from "./routes/imagenes.routes.js";
-import NM_Flor_Punto_interesRoutes from "./routes/NM_Flor_Punto_interes.routes.js";
 
 
 // constantes
@@ -36,7 +35,6 @@ app.use('/api', reseniasRoutes)
 app.use('/api', temporadasRoutes)
 app.use('/api', floresRoutes)
 app.use('/api', imagenesRoutes)
-app.use('/api', NM_Flor_Punto_interesRoutes)
 
 // iniciar servidor
 app.listen(PORT, () => {

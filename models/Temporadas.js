@@ -33,7 +33,7 @@ const Temporadas = sequelize.define("temporadas", {
 // Relacion entre PuntosInteres y Temporadas
 
 PuntosInteres.hasMany(Temporadas, {
-  foreignKey: "puntos_interes_id",
+  foreignKey: "punto_interes_id",
   onDelete: "CASCADE",
   hooks: true,
 });
