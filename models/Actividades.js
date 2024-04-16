@@ -37,28 +37,25 @@ const Actividades = sequelize.define("actividades", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  temporada_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
 });
-Actividades.belongsTo(Temporadas, {foreignKey: "temporada_id"});
-Imagenes.hasMany(Actividades, {
+Actividades.hasMany(Imagenes, {
   foreignKey: "actividad_id",
   onDelete: "CASCADE",
   hooks: true,
+  sourceKey: "id",
 });
 Temporadas.hasMany(Actividades, {
   foreignKey: "temporada_id",
   onDelete: "CASCADE",
   hooks: true,
-});
-Resenias.belongsTo(Actividades, {foreignKey: "actividad_id"});
 
-Resenias.hasMany(Actividades, {
+});
+
+Actividades.hasMany(Resenias, {
   foreignKey: "actividad_id",
   onDelete: "CASCADE",
   hooks: true,
-});
+})
+
 
 export default Actividades;

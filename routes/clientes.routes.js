@@ -32,27 +32,22 @@ Clientes.beforeCreate(async (cliente) => {
 export default router
   .get(
     "/clientes",
-    checkToken,
     async (req, res) => await readItems(req, res, Clientes)
   )
   .get(
     "/clientes/:id",
-    checkToken,
     async (req, res) => await readItem(req, res, Clientes)
   )
   .post(
     "/clientes",
-    checkToken,
     async (req, res) => await createItem(req, res, Clientes)
   )
   .put(
     "/clientes/:id",
-    checkToken,
     async (req, res) => await updateItem(req, res, Clientes)
   )
   .delete(
     "/clientes/:id",
-    checkToken,
     async (req, res) => await deleteItem(req, res, Clientes)
   )
   .post(

@@ -10,6 +10,7 @@ import {
   todos_puntos_interes,
   puntos_interes_buscador,
   punto_interes_page,
+  puntos_interes_propietarios,
 } from "../controllers/puntos_interes.controllers.js";
 import {Router} from "express";
 
@@ -27,27 +28,22 @@ import Resenias from "../models/Resenias.js";
 export default router
   .get(
     "/puntos_interes",
-    checkToken,
     async (req, res) => await readItems(req, res, PuntosInteres)
   )
   .get(
     "/puntos_interes/:id",
-    checkToken,
     async (req, res) => await readItem(req, res, PuntosInteres)
   )
   .post(
     "/puntos_interes",
-    checkToken,
     async (req, res) => await createItem(req, res, PuntosInteres)
   )
   .put(
     "/puntos_interes/:id",
-    checkToken,
     async (req, res) => await updateItem(req, res, PuntosInteres)
   )
   .delete(
     "/puntos_interes/:id",
-    checkToken,
     async (req, res) => await deleteItem(req, res, PuntosInteres)
   )
   .get(

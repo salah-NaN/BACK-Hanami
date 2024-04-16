@@ -40,10 +40,9 @@ const PuntosInteres = sequelize.define("puntos_interes", {
   }
 });
 
-Propietarios.hasMany(PuntosInteres, {
-  foreignKey: "punto_interes_id",
-  sourceKey: "id",
-});
 
+PuntosInteres.belongsTo(Propietarios, {
+  foreignKey: "propietario_id"
+})
 
 export default PuntosInteres;

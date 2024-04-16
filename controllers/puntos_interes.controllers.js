@@ -145,11 +145,11 @@ const puntos_interes_buscador = async (req, res, Model, Temporadas, Flores) => {
             },
           ],
         },
-        /*             {
+/*                      {
               model: Flores,
               required: false,
               where: {especie: flor},
-            }, */
+            },  */
       ],
     });
     if (!puntos_interes_buscador) {
