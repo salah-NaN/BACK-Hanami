@@ -8,6 +8,7 @@ import {
 import {actividad_page} from "../controllers/actividades.controllers.js";
 import {Router} from "express";
 import checkToken from "../middleware/checkToken.js";
+import { actividad_page } from '../controllers/actividades.controllers.js'
 
 import Actividades from "../models/Actividades.js";
 import Temporadas from "../models/Temporadas.js";
