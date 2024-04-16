@@ -66,15 +66,18 @@ const actividad_page = async (
           include: [
             {
               model: PuntosInteres
+            },
+            {
+              model:Imagenes
             }
           ]
         },
         {
           model: Resenias
+        },
+        {
+           model: Imagenes
         }
-        // {
-        //   model: Imagenes
-        // }
       ]
     })
 
