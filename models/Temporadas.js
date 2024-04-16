@@ -37,7 +37,9 @@ PuntosInteres.hasMany(Temporadas, {
   onDelete: "CASCADE",
   hooks: true,
 });
-
+Temporadas.belongsTo(PuntosInteres, {
+  foreignKey: "punto_interes_id",
+})
 // Relacion entre Temporadas y Imagenes
 
 Temporadas.hasMany(Imagenes, {
