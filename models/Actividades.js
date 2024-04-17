@@ -1,4 +1,4 @@
-import {DataTypes} from "sequelize";
+import { DataTypes } from "sequelize";
 import sequelize from "../database/database.js";
 import Temporadas from "./Temporadas.js";
 import Imagenes from "./Imagenes.js";
@@ -46,18 +46,17 @@ Actividades.hasMany(Imagenes, {
   sourceKey: "id",
 });
 
+Actividades.belongsTo(Temporadas, {
+  foreignKey: "temporada_id",
+});
 Temporadas.hasMany(Actividades, {
   foreignKey: "temporada_id",
-  onDelete: "CASCADE",
-  hooks: true,
-
 });
 
 Actividades.hasMany(Resenias, {
   foreignKey: "actividad_id",
   onDelete: "CASCADE",
   hooks: true,
-})
-
+});
 
 export default Actividades;

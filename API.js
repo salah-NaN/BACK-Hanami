@@ -1,8 +1,8 @@
-
 // imports
 import express from "express";
 import cookieParser from "cookie-parser";
-import cors from 'cors'
+import cors from "cors";
+import path from 'path';
 
 import actividadesRoutes from "./routes/actividades.routes.js";
 import propietariosRoutes from "./routes/propietarios.routes.js";
@@ -13,33 +13,33 @@ import temporadasRoutes from "./routes/temporadas.routes.js";
 import floresRoutes from "./routes/flores.routes.js";
 import imagenesRoutes from "./routes/imagenes.routes.js";
 
-
 // constantes
-const PORT = 3000
-const app = express()
+const PORT = 3000;
+const app = express();
 
 // uses
-app.use(express.json())
-app.use(cookieParser())
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
-    // servir imágenes
-    app.use("/img", express.static('public'));
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
+// servir imágenes
+const staticPath = path.join('./', 'public');
+app.use(express.static(staticPath));
 
 // rutas de todos los controladores
-app.use('/api', actividadesRoutes)
-app.use('/api', propietariosRoutes)
-app.use('/api', clientesRoutes)
-app.use('/api', puntos_interesRoutes)
-app.use('/api', reseniasRoutes)
-app.use('/api', temporadasRoutes)
-app.use('/api', floresRoutes)
-app.use('/api', imagenesRoutes)
+app.use("/api", actividadesRoutes);
+app.use("/api", propietariosRoutes);
+app.use("/api", clientesRoutes);
+app.use("/api", puntos_interesRoutes);
+app.use("/api", reseniasRoutes);
+app.use("/api", temporadasRoutes);
+app.use("/api", floresRoutes);
+app.use("/api", imagenesRoutes);
 
 // iniciar servidor
 app.listen(PORT, () => {
-    console.log('Server running in port 3000')
-})
+  console.log("Server running in port 3000");
+});
 
 /* PONER CORS SI EL DOMINIO/API(PUERTOS) ES DIFERENTE */
 
@@ -60,4 +60,3 @@ api.use(cors(
 method:OPTIONS para ver las peticiones
 
 */
-
