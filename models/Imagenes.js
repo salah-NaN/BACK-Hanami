@@ -9,6 +9,10 @@ const Imagenes = sequelize.define("imagenes", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  tipo: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   tamanio: {
     type: DataTypes.STRING,
   },
