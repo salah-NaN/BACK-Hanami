@@ -1,4 +1,4 @@
-import {Op, where} from "sequelize";
+import { Op, where } from "sequelize";
 
 const todos_puntos_interes = async (req, res, Model, Temporadas) => {
   try {
@@ -15,12 +15,12 @@ const todos_puntos_interes = async (req, res, Model, Temporadas) => {
     if (!puntos_interes) {
       return res
         .status(404)
-        .json({message: "No se encontraron puntos de interés"});
+        .json({ message: "No se encontraron puntos de interés" });
     }
 
     res.status(200).json(puntos_interes);
   } catch (error) {
-    res.status(400).json({error: error.message});
+    res.status(400).json({ error: error.message });
   }
 };
 // joel
@@ -28,7 +28,7 @@ const puntos_interes_propietarios = async (req, res, Model, Propietarios) => {
   console.log("req.params === ", req.params);
   try {
     const puntos_interes = await Model.findAll({
-      where: {propietario_id: req.params.id},
+      where: { propietario_id: req.params.id },
       include: [
         {
           model: Propietarios,
@@ -39,11 +39,11 @@ const puntos_interes_propietarios = async (req, res, Model, Propietarios) => {
     if (!puntos_interes) {
       return res
         .status(404)
-        .json({message: "No se encontraron puntos de interés"});
+        .json({ message: "No se encontraron puntos de interés" });
     }
     res.status(200).json(puntos_interes);
   } catch (error) {
-    res.status(400).json({error: error.message});
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -58,7 +58,7 @@ const punto_interes_page = async (
   Imagenes,
   Flores
 ) => {
-  const {id} = req.params;
+  const { id } = req.params;
 
   try {
     // consulta para sacar el Pdi sin las flores asociadas
@@ -89,7 +89,7 @@ const punto_interes_page = async (
     if (!punto_interes_sin_flores) {
       return res
         .status(404)
-        .json({message: "No se ha encontrado el punto de interés"});
+        .json({ message: "No se ha encontrado el punto de interés" });
     }
 
     // const punto_interes_respuesta = {
@@ -99,7 +99,7 @@ const punto_interes_page = async (
     // }
     res.status(200).json({punto_interes_sin_flores});
   } catch (error) {
-    res.status(400).json({error: error.message});
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -107,44 +107,60 @@ const punto_interes_page = async (
 const puntos_interes_buscador = async (req, res, Model, Temporadas, Flores) => {
   try {
     const poblacion = req.params.poblacion !== ";" ? req.params.poblacion : "%";
-    const fecha = req.params.fecha !== ";" ? req.params.fecha : new Date();
+    const fecha = req.params.fecha !== ";" ? new Date(req.params.fecha) : new Date();
     const flor = req.params.flor !== ";" ? req.params.flor : "%";
+    const condicion = req.params.fecha
 
+    const mas1Ano = new Date()
+    mas1Ano.setFullYear(mas1Ano.getFullYear() + 1)
+
+    console.log(mas1Ano)
     const puntos_interes_buscador = await Model.findAll({
-      where: {poblacion: {[Op.like]: poblacion}},
+      where: { poblacion: { [Op.like]: poblacion } },
       include: [
         {
           model: Temporadas,
           required: true,
-          where: {
-            fecha_inicio: {[Op.lte]: fecha},
-            fecha_fin: {[Op.gte]: fecha},
+          where: condicion !== ';'
+          ?
+          {
+            [Op.and]: {
+              fecha_inicio: { [Op.lte]: fecha },
+              fecha_fin: { [Op.gte]: fecha },
+            }
+          }
+          :
+          {
+            [Op.and]: {
+              fecha_inicio: { [Op.gte]: fecha },
+              fecha_fin: { [Op.lte]: mas1Ano },
+            }
           },
           include: [
             {
               model: Flores,
               required: true,
               where: {
-                especie: {[Op.like]: flor},
+                especie: { [Op.like]: flor },
               },
             },
           ],
         },
-/*                      {
-              model: Flores,
-              required: false,
-              where: {especie: flor},
-            },  */
+        /*                      {
+                      model: Flores,
+                      required: false,
+                      where: {especie: flor},
+                    },  */
       ],
     });
     if (!puntos_interes_buscador) {
       return res
         .status(404)
-        .json({message: "No se encontraron puntos de interés"});
+        .json({ message: "No se encontraron puntos de interés" });
     }
     res.status(200).json(puntos_interes_buscador);
   } catch (error) {
-    res.status(400).json({error: error.message});
+    res.status(400).json({ error: error.message });
   }
 };
 
