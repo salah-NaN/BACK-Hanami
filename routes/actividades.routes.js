@@ -5,7 +5,10 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
-import {actividad_page} from "../controllers/actividades.controllers.js";
+import {
+  actividad_page,
+  actividades_buscador,
+} from "../controllers/actividades.controllers.js";
 import {Router} from "express";
 import checkToken from "../middleware/checkToken.js";
 
@@ -14,6 +17,7 @@ import Temporadas from "../models/Temporadas.js";
 import Imagenes from "../models/Imagenes.js";
 import Resenias from "../models/Resenias.js";
 import PuntosInteres from "../models/Puntos_interes.js";
+import Flores from "../models/Flores.js";
 
 const router = Router();
 
@@ -40,5 +44,26 @@ export default router
   )
   .get(
     "/actividad_page/:id",
-    async (req, res) => await actividad_page(req, res, Actividades, Temporadas, PuntosInteres, Imagenes, Resenias)
+    async (req, res) =>
+      await actividad_page(
+        req,
+        res,
+        Actividades,
+        Temporadas,
+        PuntosInteres,
+        Imagenes,
+        Resenias
+      )
+  )
+  .get(
+    "/actividades/:poblacion/:fecha/:flor",
+    async (req, res) =>
+      await actividades_buscador(
+        req,
+        res,
+        Actividades,
+        Temporadas,
+        Flores,
+        PuntosInteres
+      )
   );
