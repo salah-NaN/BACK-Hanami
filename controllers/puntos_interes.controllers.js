@@ -58,11 +58,10 @@ const punto_interes_page = async (
   Imagenes,
   Flores
 ) => {
-  const {id} = req.params;
-
   try {
+    const {id} = req.params;
     // consulta para sacar el Pdi sin las flores asociadas
-    const punto_interes_sin_flores = await Model.findByPk(id, {
+    const puntoInteres = await Model.findByPk(id, {
       include: [
         {
           model: Temporadas,
@@ -70,12 +69,11 @@ const punto_interes_page = async (
             {model: Flores},
             {
               model: Actividades,
+              include: [{model: Imagenes}],
             },
           ],
         },
-        // {
-        //     model: Propietarios,
-        // },
+        {model: Propietarios},
         {
           model: Imagenes,
         } /*
@@ -86,7 +84,7 @@ const punto_interes_page = async (
     });
 
     // console.log(punto_interes_sin_flores)
-    if (!punto_interes_sin_flores) {
+    if (!puntoInteres) {
       return res
         .status(404)
         .json({message: "No se ha encontrado el punto de interés"});
@@ -97,7 +95,7 @@ const punto_interes_page = async (
     //     ...flores
 
     // }
-    res.status(200).json({punto_interes_sin_flores});
+    res.status(200).json(puntoInteres);
   } catch (error) {
     res.status(400).json({error: error.message});
   }
