@@ -11,8 +11,9 @@ import {
   puntos_interes_buscador,
   punto_interes_page,
   puntos_interes_propietarios,
+  puntos_interes_una_semana,
 } from "../controllers/puntos_interes.controllers.js";
-import {Router} from "express";
+import { Router } from "express";
 
 const router = Router();
 
@@ -73,6 +74,18 @@ export default router
         Actividades,
         Imagenes,
         Flores
+      )
+  )
+  .get(
+    "/actividades_or_puntointeres",
+    async (req, res) =>
+      await puntos_interes_una_semana(
+        req,
+        res,
+        PuntosInteres,
+        Temporadas,
+        Actividades,
+        Imagenes
       )
   );
 // .get(
