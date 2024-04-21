@@ -27,7 +27,7 @@ const actividades_buscador = async (
       include: [
         {
           model: Temporadas,
-          required: true,
+          required: false,
           include: [
             {
               model: Flores,

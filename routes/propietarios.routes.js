@@ -31,7 +31,6 @@ export default router
   )
   .get(
     "/propietarios/:id",
-    checkToken,
     async (req, res) => await readItem(req, res, Propietarios)
   )
   .post(
@@ -42,7 +41,6 @@ export default router
   // Si queremos que pueda modificar sus datos (email, contraseña, etc) .put("/propietarios/:id/login", checkToken, async (req, res) => await updateItem(req, res, Propietarios))
   .put(
     "/propietarios/:id",
-    checkToken,
     async (req, res) => await updateItem(req, res, Propietarios)
   )
   .delete(

@@ -60,7 +60,7 @@ const punto_interes_page = async (
   Flores
 ) => {
   try {
-    const { id } = req.params;
+    const {id} = req.params;
     // consulta para sacar el Pdi sin las flores asociadas
     const puntoInteres = await Model.findByPk(id, {
       include: [
@@ -70,11 +70,11 @@ const punto_interes_page = async (
             { model: Flores },
             {
               model: Actividades,
-              include: [{ model: Imagenes }],
+              include: [{model: Imagenes}],
             },
           ],
         },
-        { model: Propietarios },
+        {model: Propietarios},
         {
           model: Imagenes,
         } /*
