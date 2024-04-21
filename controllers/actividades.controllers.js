@@ -28,19 +28,6 @@ const actividades_buscador = async (
         {
           model: Temporadas,
           required: false,
-          include: [
-            {
-              model: Flores,
-              required: true,
-              where: {
-                especie: {[Op.like]: flor},
-              },
-            },
-            {
-              model: PuntosInteres,
-              required: true,
-            },
-          ],
           where:
             //miramos si lo que nos llega es un ";", que es si el usuario  ha introducido algun dato
             condicion !== ";"
@@ -56,6 +43,20 @@ const actividades_buscador = async (
                     fecha_fin: {[Op.lte]: mas1Ano},
                   },
                 },
+          include: [
+            {
+              model: Flores,
+              required: true,
+              where: {
+                especie: {[Op.like]: flor},
+              },
+            },
+            {
+              model: PuntosInteres,
+              required: true,
+            },
+          ],
+          
         },
 
         /*             {
@@ -68,7 +69,8 @@ const actividades_buscador = async (
     if (!actividades_buscador) {
       return res.status(404).json({message: "No se encontraron actividades"});
     }
-    res.status(200).json(actividades_buscador);
+    const newData = actividades_buscador.filter(pi => pi.temporada !== null)
+    res.status(200).json(newData);
   } catch (error) {
     res.status(400).json({error: error.message});
   }
