@@ -8,8 +8,9 @@ import {
 import {
   actividad_page,
   actividades_buscador,
+  actividades_punto_interes,
 } from "../controllers/actividades.controllers.js";
-import {Router} from "express";
+import { Router } from "express";
 import checkToken from "../middleware/checkToken.js";
 
 import Actividades from "../models/Actividades.js";
@@ -65,5 +66,18 @@ export default router
         Temporadas,
         Flores,
         PuntosInteres
+      )
+  )
+
+  .get(
+    "/actividades_punto_interes/:id",
+    async (req, res) =>
+      await actividades_punto_interes(
+        req,
+        res,
+        PuntosInteres,
+        Temporadas,
+        Imagenes,
+        Actividades,
       )
   );
