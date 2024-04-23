@@ -9,6 +9,7 @@ import {
   actividad_page,
   actividades_buscador,
   actividades_punto_interes,
+  actividades_editar
 } from "../controllers/actividades.controllers.js";
 import { Router } from "express";
 import checkToken from "../middleware/checkToken.js";
