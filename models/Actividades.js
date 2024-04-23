@@ -11,11 +11,11 @@ const Actividades = sequelize.define("actividades", {
   },
   categoria: {
     type: DataTypes.ENUM,
-    values: ["Bici", "Senderismo"],
+    values: ["Bici", "Senderismo", "A pie", "Paseo en carro"],
     allowNull: false,
   },
   descripcion: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   latitud: {
     type: DataTypes.DECIMAL(10, 8),
