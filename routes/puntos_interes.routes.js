@@ -55,7 +55,7 @@ export default router
   .get(
     "/puntos_interes/:poblacion/:fecha/:flor",
     async (req, res) =>
-      await puntos_interes_buscador(req, res, PuntosInteres, Temporadas, Flores)
+      await puntos_interes_buscador(req, res, PuntosInteres, Temporadas, Flores, Imagenes)
   )
   .get(
     "/puntos_interes_propietarios/:id",
