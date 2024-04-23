@@ -102,7 +102,7 @@ const punto_interes_page = async (
   }
 };
 // endpoint que muestra los puntos de interes(con temporadas y las flores correspondientes) segun los parametros introducidos
-const puntos_interes_buscador = async (req, res, Model, Temporadas, Flores) => {
+const puntos_interes_buscador = async (req, res, Model, Temporadas, Flores, Imagenes) => {
   try {
     //comprueba si los parametros llegan vacios (";") y los sustituye por un "%" o si tenian datos
     const poblacion = req.params.poblacion !== ";" ? req.params.poblacion : "%";
@@ -148,6 +148,9 @@ const puntos_interes_buscador = async (req, res, Model, Temporadas, Flores) => {
             },
           ],
         },
+        {
+          model: Imagenes,
+        }
       ],
     });
     if (!puntos_interes_buscador) {
