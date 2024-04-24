@@ -23,7 +23,7 @@ app.use(cors());
 
 /* app.use(cors({ origin: "http://localhost:5173", credentials: true })); */
 // servir imágenes
-app.use("/img", express.static("public"));
+app.use("/api/img", express.static("public"));
 
 // rutas de todos los controladores
 app.use("/api", actividadesRoutes);
