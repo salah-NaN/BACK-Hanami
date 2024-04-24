@@ -2,7 +2,7 @@ import {Sequelize} from "sequelize";
 
 const sequelize = new Sequelize("hanami", "root", "admin", {
   host: "localhost",
-  port: 3308,
+  port: 3306,
   dialect: "mysql",
   define: {
     timestamps: false,
