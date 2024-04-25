@@ -1,7 +1,14 @@
 import sequelize from "sequelize";
-import {Op, where} from "sequelize";
+import { Op, where } from "sequelize";
 
-const todos_puntos_interes = async (req, res, Model, Temporadas, Flores, Resenias) => {
+const todos_puntos_interes = async (
+  req,
+  res,
+  Model,
+  Temporadas,
+  Flores,
+  Resenias
+) => {
   try {
     const puntos_interes = await Model.findAll({
       // where: {id: 3} // Incluye todas las temporadas asociadas a los puntos de interés
@@ -9,7 +16,7 @@ const todos_puntos_interes = async (req, res, Model, Temporadas, Flores, Resenia
         {
           model: Temporadas,
           required: false,
-          include: [{model: Flores}],
+          include: [{ model: Flores }],
         },
       ],
     });
@@ -17,12 +24,12 @@ const todos_puntos_interes = async (req, res, Model, Temporadas, Flores, Resenia
     if (!puntos_interes) {
       return res
         .status(404)
-        .json({message: "No se encontraron puntos de interés"});
+        .json({ message: "No se encontraron puntos de interés" });
     }
 
     res.status(200).json(puntos_interes);
   } catch (error) {
-    res.status(400).json({error: error.message});
+    res.status(400).json({ error: error.message });
   }
 };
 // joel
@@ -30,7 +37,7 @@ const puntos_interes_propietarios = async (req, res, Model, Propietarios) => {
   console.log("req.params === ", req.params);
   try {
     const puntos_interes = await Model.findAll({
-      where: {propietario_id: req.params.id},
+      where: { propietario_id: req.params.id },
       include: [
         {
           model: Propietarios,
@@ -41,11 +48,11 @@ const puntos_interes_propietarios = async (req, res, Model, Propietarios) => {
     if (!puntos_interes) {
       return res
         .status(404)
-        .json({message: "No se encontraron puntos de interés"});
+        .json({ message: "No se encontraron puntos de interés" });
     }
     res.status(200).json(puntos_interes);
   } catch (error) {
-    res.status(400).json({error: error.message});
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -62,21 +69,21 @@ const punto_interes_page = async (
   Flores
 ) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     // consulta para sacar el Pdi sin las flores asociadas
     const puntoInteres = await Model.findByPk(id, {
       include: [
         {
           model: Temporadas,
           include: [
-            {model: Flores},
+            { model: Flores },
             {
               model: Actividades,
-              include: [{model: Imagenes}, {model: Resenias}],
+              include: [{ model: Imagenes }, { model: Resenias }],
             },
           ],
         },
-        {model: Propietarios},
+        { model: Propietarios },
         {
           model: Imagenes,
         } /*
@@ -90,7 +97,7 @@ const punto_interes_page = async (
     if (!puntoInteres) {
       return res
         .status(404)
-        .json({message: "No se ha encontrado el punto de interés"});
+        .json({ message: "No se ha encontrado el punto de interés" });
     }
 
     // const punto_interes_respuesta = {
@@ -100,7 +107,7 @@ const punto_interes_page = async (
     // }
     res.status(200).json(puntoInteres);
   } catch (error) {
-    res.status(400).json({error: error.message});
+    res.status(400).json({ error: error.message });
   }
 };
 // endpoint que muestra los puntos de interes(con temporadas y las flores correspondientes) segun los parametros introducidos
@@ -116,11 +123,12 @@ const puntos_interes_buscador = async (
 ) => {
   try {
     //comprueba si los parametros llegan vacios (";") y los sustituye por un "%" o si tenian datos
-    const provincias = ["LLeida", "Barcelona", "Girona", "Tarragona"];
-    const poblacion = req.params.poblacion !== ";" ? req.params.poblacion : "%";
+    let poblacion = req.params.poblacion !== ";" ? req.params.poblacion : "%";
     const fecha =
       req.params.fecha !== ";" ? new Date(req.params.fecha) : new Date();
     const flor = req.params.flor !== ";" ? req.params.flor : "%";
+    // poblacion = req.params?.poblacion;
+    // const nombreProvinciaPoblacion = poblacion.split(":")[1];
 
     //creamos constante con la fecha que nos llega
     const condicion = req.params.fecha;
@@ -128,11 +136,15 @@ const puntos_interes_buscador = async (
     //preparamos una const que es la fecha dentro de 1 año respecto el dia de hoy
     const mas1Ano = new Date();
     mas1Ano.setFullYear(mas1Ano.getFullYear() + 1);
+    console.log(poblacion);
 
     const puntos_interes_buscador = await Model.findAll({
-      where: provincias.includes(poblacion)
-        ? {provincia: {[Op.like]: poblacion}}
-        : {poblacion: {[Op.like]: poblacion}},
+      where: poblacion.includes("provincia")
+        ? { provincia: { [Op.like]: poblacion?.split(":")[1] } }
+        : poblacion.includes('poblacion')
+        ? { poblacion: { [Op.like]: poblacion?.split(":")[1] } }
+        : { poblacion: { [Op.like]: poblacion } },
+
       include: [
         {
           model: Temporadas,
@@ -142,14 +154,14 @@ const puntos_interes_buscador = async (
             condicion !== ";"
               ? {
                   [Op.and]: {
-                    fecha_inicio: {[Op.lte]: fecha},
-                    fecha_fin: {[Op.gte]: fecha},
+                    fecha_inicio: { [Op.lte]: fecha },
+                    fecha_fin: { [Op.gte]: fecha },
                   },
                 }
               : {
                   [Op.and]: {
-                    fecha_inicio: {[Op.gte]: fecha},
-                    fecha_fin: {[Op.lte]: mas1Ano},
+                    fecha_inicio: { [Op.gte]: fecha },
+                    fecha_fin: { [Op.lte]: mas1Ano },
                   },
                 },
           include: [
@@ -157,12 +169,12 @@ const puntos_interes_buscador = async (
               model: Flores,
               required: true,
               where: {
-                especie: {[Op.like]: flor},
+                especie: { [Op.like]: flor },
               },
             },
             {
               model: Actividades,
-              include: [{model: Imagenes}, {model: Resenias}],
+              include: [{ model: Imagenes }, { model: Resenias }],
             },
           ],
         },
@@ -174,11 +186,11 @@ const puntos_interes_buscador = async (
     if (!puntos_interes_buscador) {
       return res
         .status(404)
-        .json({message: "No se encontraron puntos de interés"});
+        .json({ message: "No se encontraron puntos de interés" });
     }
     res.status(200).json(puntos_interes_buscador);
   } catch (error) {
-    res.status(400).json({error: error.message});
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -198,8 +210,8 @@ const puntos_interes_una_semana = async (
   const puntos_interes_actividades_un_semana = await Temporadas.findAll({
     where: {
       [Op.and]: {
-        fecha_inicio: {[Op.lte]: dateHoy},
-        fecha_fin: {[Op.gte]: endDate},
+        fecha_inicio: { [Op.lte]: dateHoy },
+        fecha_fin: { [Op.gte]: endDate },
       },
     },
     include: [
@@ -227,7 +239,7 @@ const puntos_interes_una_semana = async (
   if (!puntos_interes_actividades_un_semana) {
     return res
       .status(404)
-      .json({message: "No se encontraron puntos de interés o actividades"});
+      .json({ message: "No se encontraron puntos de interés o actividades" });
   }
   res.status(200).json(puntos_interes_actividades_un_semana);
 };
