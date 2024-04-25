@@ -1,7 +1,7 @@
 import sequelize from "sequelize";
 import {Op, where} from "sequelize";
 
-const todos_puntos_interes = async (req, res, Model, Temporadas, Flores) => {
+const todos_puntos_interes = async (req, res, Model, Temporadas, Flores, Resenias) => {
   try {
     const puntos_interes = await Model.findAll({
       // where: {id: 3} // Incluye todas las temporadas asociadas a los puntos de interés
@@ -9,7 +9,7 @@ const todos_puntos_interes = async (req, res, Model, Temporadas, Flores) => {
         {
           model: Temporadas,
           required: false,
-          include: [{model: Flores}]
+          include: [{model: Flores}],
         },
       ],
     });
@@ -58,6 +58,7 @@ const punto_interes_page = async (
   Temporadas,
   Actividades,
   Imagenes,
+  Resenias,
   Flores
 ) => {
   try {
@@ -71,7 +72,7 @@ const punto_interes_page = async (
             {model: Flores},
             {
               model: Actividades,
-              include: [{model: Imagenes}],
+              include: [{model: Imagenes}, {model: Resenias}],
             },
           ],
         },
@@ -109,6 +110,8 @@ const puntos_interes_buscador = async (
   Model,
   Temporadas,
   Flores,
+  Actividades,
+  Resenias,
   Imagenes
 ) => {
   try {
@@ -156,6 +159,10 @@ const puntos_interes_buscador = async (
               where: {
                 especie: {[Op.like]: flor},
               },
+            },
+            {
+              model: Actividades,
+              include: [{model: Imagenes}, {model: Resenias}],
             },
           ],
         },

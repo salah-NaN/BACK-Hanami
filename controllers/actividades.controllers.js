@@ -1,3 +1,4 @@
+import Resenias from "../models/Resenias.js";
 import {Op, where} from "sequelize";
 
 const actividades_buscador = async (
@@ -25,6 +26,10 @@ const actividades_buscador = async (
         poblacion: {[Op.like]: poblacion},
       },
       include: [
+        {
+          model: Resenias,
+          required: false,
+        },
         {
           model: Temporadas,
           required: false,
@@ -56,7 +61,6 @@ const actividades_buscador = async (
               required: true,
             },
           ],
-          
         },
 
         /*             {
@@ -69,7 +73,7 @@ const actividades_buscador = async (
     if (!actividades_buscador) {
       return res.status(404).json({message: "No se encontraron actividades"});
     }
-    const newData = actividades_buscador.filter(pi => pi.temporada !== null)
+    const newData = actividades_buscador.filter((pi) => pi.temporada !== null);
     res.status(200).json(newData);
   } catch (error) {
     res.status(400).json({error: error.message});

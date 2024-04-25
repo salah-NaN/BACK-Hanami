@@ -64,6 +64,7 @@ export default router
         Actividades,
         Temporadas,
         Flores,
-        PuntosInteres
+        PuntosInteres,
+        Resenias
       )
   );
