@@ -88,7 +88,8 @@ const actividad_page = async (
   Temporadas,
   PuntosInteres,
   Imagenes,
-  Resenias
+  Resenias,
+  Propietarios
 ) => {
   try {
     const {id} = req.params;
@@ -99,6 +100,7 @@ const actividad_page = async (
           include: [
             {
               model: PuntosInteres,
+              include: [{model: Propietarios}]
             },
             {
               model: Imagenes,
