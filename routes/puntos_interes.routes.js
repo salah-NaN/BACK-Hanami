@@ -55,8 +55,8 @@ export default router
         res,
         PuntosInteres,
         Temporadas,
-        Resenias,
-        Flores
+        Flores,
+        Resenias
       )
   )
   .get(

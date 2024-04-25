@@ -1,7 +1,7 @@
 import sequelize from "sequelize";
 import {Op, where} from "sequelize";
 
-const todos_puntos_interes = async (req, res, Model, Temporadas, Flores) => {
+const todos_puntos_interes = async (req, res, Model, Temporadas, Flores, Resenias) => {
   try {
     const puntos_interes = await Model.findAll({
       // where: {id: 3} // Incluye todas las temporadas asociadas a los puntos de interés
