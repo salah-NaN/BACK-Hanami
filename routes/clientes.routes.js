@@ -14,6 +14,8 @@ import { cliente_resenias } from '../controllers/clientes.controllers.js'
 
 import { Router } from "express";
 import Clientes from "../models/Clientes.js";
+import Resenias from "../models/Resenias.js";
+import Actividades from "../models/Actividades.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import checkToken from "../middleware/checkToken.js";
@@ -60,7 +62,7 @@ export default router
     async (req, res) => await login(req, res, Clientes, jwt, secretKey)
   )
   .get(
-    "/clientes/cliente_resenias",
+    "/cliente/resenias",
     checkToken,
-    async (req, res) => await cliente_resenias(req, res, Clientes, )
+    async (req, res) => await cliente_resenias(req, res, Clientes, Resenias, Actividades)
   )
