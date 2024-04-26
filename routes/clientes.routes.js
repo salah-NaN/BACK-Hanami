@@ -7,12 +7,15 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/generics.controllers.js";
-import {register, login} from "../controllers/auth.controllers.js";
+import { register, login } from "../controllers/auth.controllers.js";
+import { cliente_resenias } from '../controllers/clientes.controllers.js'
 
 // imports dependencias
 
-import {Router} from "express";
+import { Router } from "express";
 import Clientes from "../models/Clientes.js";
+import Resenias from "../models/Resenias.js";
+import Actividades from "../models/Actividades.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import checkToken from "../middleware/checkToken.js";
@@ -57,4 +60,9 @@ export default router
   .post(
     "/clientes/login",
     async (req, res) => await login(req, res, Clientes, jwt, secretKey)
+  )
+  .get(
+    "/cliente/resenias",
+    checkToken,
+    async (req, res) => await cliente_resenias(req, res, Clientes, Resenias, Actividades)
   )
