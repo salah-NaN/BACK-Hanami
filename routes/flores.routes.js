@@ -27,4 +27,4 @@ export default router
     "/flores/:id",
     async (req, res) => await deleteItem(req, res, Flores)
   )
-  .get("/flores/imagenes/temporada/:id", async (req, res) => await todos_flores(req, res, Flores, Temporadas, Imagenes));
+  .get("/flores/imagenes/temporada/:id/:idPunto", async (req, res) => await todos_flores(req, res, Flores, Temporadas, Imagenes));

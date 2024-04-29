@@ -12,6 +12,7 @@ import {
   punto_interes_page,
   puntos_interes_propietarios,
   puntos_interes_una_semana,
+  get_images_puntos_interes,
 } from "../controllers/puntos_interes.controllers.js";
 import { Router } from "express";
 
@@ -87,6 +88,10 @@ export default router
         Actividades,
         Imagenes
       )
+  )
+  .get(
+    "/get_images_puntos_interes/:id",
+    async (req, res) => await get_images_puntos_interes(req, res, Imagenes)
   );
 // .get(
 //   "/actividades/:poblacion/:fecha/:flor",

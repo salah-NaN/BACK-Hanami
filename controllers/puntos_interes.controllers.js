@@ -209,9 +209,21 @@ const puntos_interes_una_semana = async (
       .json({ message: "No se encontraron puntos de interés o actividades" });
   }
   res.status(200).json(puntos_interes_actividades_un_semana);
+}
+
+const get_images_puntos_interes = async (req, res, Model) => {
+  try {
+    const images = await Model.findOne({
+      where: { punto_interes_id: req.params.id }
+    });
+    res.status(200).json(images);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 export {
+  get_images_puntos_interes,
   todos_puntos_interes,
   puntos_interes_propietarios,
   punto_interes_page,
