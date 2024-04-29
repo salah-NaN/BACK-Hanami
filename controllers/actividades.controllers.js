@@ -1,5 +1,5 @@
 import Resenias from "../models/Resenias.js";
-import {Op, where} from "sequelize";
+import { Op, where } from "sequelize";
 
 const actividades_buscador = async (
   req,
@@ -7,7 +7,9 @@ const actividades_buscador = async (
   Model,
   Temporadas,
   Flores,
-  PuntosInteres
+  PuntosInteres,
+  Resenias,
+  Imagenes
 ) => {
   try {
     const poblacion = req.params.poblacion !== ";" ? req.params.poblacion : "%";
@@ -23,12 +25,15 @@ const actividades_buscador = async (
 
     const actividades_buscador = await Model.findAll({
       where: {
-        poblacion: {[Op.like]: poblacion},
+        poblacion: { [Op.like]: poblacion },
       },
       include: [
         {
           model: Resenias,
           required: false,
+        },
+        {
+          model: Imagenes,
         },
         {
           model: Temporadas,
@@ -37,23 +42,23 @@ const actividades_buscador = async (
             //miramos si lo que nos llega es un ";", que es si el usuario  ha introducido algun dato
             condicion !== ";"
               ? {
-                  [Op.and]: {
-                    fecha_inicio: {[Op.lte]: fecha},
-                    fecha_fin: {[Op.gte]: fecha},
-                  },
-                }
-              : {
-                  [Op.and]: {
-                    fecha_inicio: {[Op.gte]: fecha},
-                    fecha_fin: {[Op.lte]: mas1Ano},
-                  },
+                [Op.and]: {
+                  fecha_inicio: { [Op.lte]: fecha },
+                  fecha_fin: { [Op.gte]: fecha },
                 },
+              }
+              : {
+                [Op.and]: {
+                  fecha_inicio: { [Op.gte]: fecha },
+                  fecha_fin: { [Op.lte]: mas1Ano },
+                },
+              },
           include: [
             {
               model: Flores,
               required: true,
               where: {
-                especie: {[Op.like]: flor},
+                especie: { [Op.like]: flor },
               },
             },
             {
@@ -71,12 +76,12 @@ const actividades_buscador = async (
       ],
     });
     if (!actividades_buscador) {
-      return res.status(404).json({message: "No se encontraron actividades"});
+      return res.status(404).json({ message: "No se encontraron actividades" });
     }
     const newData = actividades_buscador.filter((pi) => pi.temporada !== null);
     res.status(200).json(newData);
   } catch (error) {
-    res.status(400).json({error: error.message});
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -92,7 +97,7 @@ const actividad_page = async (
   Propietarios
 ) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const actividad = await Model.findByPk(id, {
       include: [
         {
@@ -100,7 +105,7 @@ const actividad_page = async (
           include: [
             {
               model: PuntosInteres,
-              include: [{model: Propietarios}]
+              include: [{ model: Propietarios }]
             },
             {
               model: Imagenes,
@@ -117,7 +122,7 @@ const actividad_page = async (
     });
 
     if (!actividad) {
-      return res.status(404).json({message: "No se encontraron actividades"});
+      return res.status(404).json({ message: "No se encontraron actividades" });
     }
     //codigo de prueba, es borrable
     // const actividad_sola = await Model.findByPk(id)
@@ -127,8 +132,8 @@ const actividad_page = async (
     // const resenias = await actividad_sola.get
     res.status(200).json(actividad);
   } catch (error) {
-    res.status(400).json({error: error.message});
+    res.status(400).json({ error: error.message });
   }
 };
 
-export {actividades_buscador, actividad_page};
+export { actividades_buscador, actividad_page };

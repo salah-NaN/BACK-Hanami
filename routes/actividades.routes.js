@@ -9,7 +9,7 @@ import {
   actividad_page,
   actividades_buscador,
 } from "../controllers/actividades.controllers.js";
-import {Router} from "express";
+import { Router } from "express";
 import checkToken from "../middleware/checkToken.js";
 
 import Actividades from "../models/Actividades.js";
@@ -67,6 +67,7 @@ export default router
         Temporadas,
         Flores,
         PuntosInteres,
-        Resenias
+        Resenias,
+        Imagenes
       )
   );
