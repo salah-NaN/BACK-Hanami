@@ -14,6 +14,9 @@ async function iniDB() {
   await sequelize.sync({force: true});
 }
 
+//iniDB();
+ 
+=======
 // iniDB();
 
 sequelize

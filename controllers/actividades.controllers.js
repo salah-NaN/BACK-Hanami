@@ -139,4 +139,60 @@ const actividad_page = async (
   }
 };
 
-export { actividades_buscador, actividad_page };
+const actividades_punto_interes = async (req, res, Model, Temporada, Imagenes, Actividades) => {
+  try{
+    const {id} = req.params;
+    const punto_interes = await Model.findByPk(id, {
+      
+      include: [
+        {
+          model: Temporada,
+          include: [
+            {
+              model: Imagenes
+            },
+            {
+              model: Actividades
+            }
+          ]
+        },
+      ]
+    });
+    if (!punto_interes) {
+      return res.status(404).json({message: "No se encontraron puntos de interés"});
+    }
+    res.status(200).json(punto_interes.temporadas);
+  }catch(error){
+    res.status(400).json({error: error.message});
+    
+  }
+}
+const actividades_editar = async (req, res, Model, Temporada, Imagenes, Actividades) => {
+  try{
+    const {id} = req.params;
+    const punto_interes = await Model.findByPk(id, {
+      
+      include: [
+        {
+          model: Temporada,
+          include: [
+            {
+              model: Imagenes
+            },
+            {
+              model: Actividades
+            }
+          ]
+        },
+      ]
+    });
+    if (!punto_interes) {
+      return res.status(404).json({message: "No se encontraron puntos de interés"});
+    }
+    res.status(200).json(punto_interes.temporadas);
+  }catch(error){
+    res.status(400).json({error: error.message});
+  }
+}
+export {actividades_buscador, actividad_page, actividades_punto_interes, actividades_editar};
+
