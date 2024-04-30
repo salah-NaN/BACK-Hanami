@@ -13,6 +13,8 @@ import {
   puntos_interes_propietarios,
   puntos_interes_una_semana,
 } from "../controllers/puntos_interes.controllers.js";
+
+import { actividades_buscador } from '../controllers/actividades.controllers.js'
 import {Router} from "express";
 
 const router = Router();
@@ -104,18 +106,18 @@ export default router
         Actividades,
         Imagenes
       )
-  );
-// .get(
-//   "/actividades/:poblacion/:fecha/:flor",
-//   async (req, res) =>
-//     await actividades_buscador(
-//       req,
-//       res,
-//       Actividades,
-//       Temporadas,
-//       PuntosInteres
-//     )
-// );
+  )
+.get(
+  "/actividades/:poblacion/:fecha/:flor",
+  async (req, res) =>
+    await actividades_buscador(
+      req,
+      res,
+      Actividades,
+      Temporadas,
+      PuntosInteres
+    )
+);
 /*
     Endpoint para poder sacar todos los puntos de interés y todas sus temporadas 
     asociadas

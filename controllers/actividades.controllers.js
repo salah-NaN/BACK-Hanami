@@ -24,9 +24,12 @@ const actividades_buscador = async (
     mas1Ano.setFullYear(mas1Ano.getFullYear() + 1);
 
     const actividades_buscador = await Model.findAll({
-      where: {
-        poblacion: { [Op.like]: poblacion },
-      },
+
+      where: poblacion.includes("provincia")
+        ? { provincia: { [Op.like]: poblacion?.split(":")[1] } }
+        : poblacion.includes("poblacion")
+        ? { poblacion: { [Op.like]: poblacion?.split(":")[1] } }
+        : { poblacion: { [Op.like]: poblacion } },
       include: [
         {
           model: Resenias,
@@ -42,17 +45,17 @@ const actividades_buscador = async (
             //miramos si lo que nos llega es un ";", que es si el usuario  ha introducido algun dato
             condicion !== ";"
               ? {
-                [Op.and]: {
-                  fecha_inicio: { [Op.lte]: fecha },
-                  fecha_fin: { [Op.gte]: fecha },
-                },
-              }
+                  [Op.and]: {
+                    fecha_inicio: { [Op.lte]: fecha },
+                    fecha_fin: { [Op.gte]: fecha },
+                  },
+                }
               : {
-                [Op.and]: {
-                  fecha_inicio: { [Op.gte]: fecha },
-                  fecha_fin: { [Op.lte]: mas1Ano },
+                  [Op.and]: {
+                    fecha_inicio: { [Op.gte]: fecha },
+                    fecha_fin: { [Op.lte]: mas1Ano },
+                  },
                 },
-              },
           include: [
             {
               model: Flores,
@@ -105,7 +108,7 @@ const actividad_page = async (
           include: [
             {
               model: PuntosInteres,
-              include: [{ model: Propietarios }]
+              include: [{ model: Propietarios }],
             },
             {
               model: Imagenes,
