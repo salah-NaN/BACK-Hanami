@@ -11,6 +11,21 @@ import reseniasRoutes from "./routes/resenias.routes.js";
 import temporadasRoutes from "./routes/temporadas.routes.js";
 import floresRoutes from "./routes/flores.routes.js";
 import imagenesRoutes from "./routes/imagenes.routes.js";
+import multer from "multer";
+import path from "path";
+
+const storage = multer.diskStorage({
+  destination: './public',
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    const ext = path.extname(file.originalname)
+    cb(null, file.fieldname + '-' + uniqueSuffix + ext);
+
+  }
+})
+
+const upload = multer({ storage: storage })
+
 
 // constantes
 const PORT = 3000;
@@ -33,6 +48,13 @@ app.use("/api", reseniasRoutes);
 app.use("/api", temporadasRoutes);
 app.use("/api", floresRoutes);
 app.use("/api", imagenesRoutes);
+
+
+app.post('/upload', upload.single('file'), (req, res) => {
+
+  res.send(req.file)
+  return res.json({ message: 'File uploaded successfully' });
+})
 
 // iniciar servidor
 app.listen(PORT, () => {
