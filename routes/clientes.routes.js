@@ -28,20 +28,15 @@ Clientes.beforeCreate(async (cliente) => {
   const codedPassword = await bcrypt.hash(cliente.password, 10);
   cliente.password = codedPassword;
 });
+Clientes.beforeUpdate(async (cliente) => {
+  const codedPassword = await bcrypt.hash(cliente.password, 10);
+  cliente.password = codedPassword;
+});
 
 export default router
-  .get(
-    "/clientes",
-    async (req, res) => await readItems(req, res, Clientes)
-  )
-  .get(
-    "/clientes/:id",
-    async (req, res) => await readItem(req, res, Clientes)
-  )
-  .post(
-    "/clientes",
-    async (req, res) => await createItem(req, res, Clientes)
-  )
+  .get("/clientes", async (req, res) => await readItems(req, res, Clientes))
+  .get("/clientes/:id", async (req, res) => await readItem(req, res, Clientes))
+  .post("/clientes", async (req, res) => await createItem(req, res, Clientes))
   .put(
     "/clientes/:id",
     async (req, res) => await updateItem(req, res, Clientes)
@@ -57,4 +52,4 @@ export default router
   .post(
     "/clientes/login",
     async (req, res) => await login(req, res, Clientes, jwt, secretKey)
-  )
+  );
