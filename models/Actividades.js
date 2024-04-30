@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+import {DataTypes} from "sequelize";
 import sequelize from "../database/database.js";
 import Temporadas from "./Temporadas.js";
 import Imagenes from "./Imagenes.js";
@@ -34,6 +34,10 @@ const Actividades = sequelize.define("actividades", {
     allowNull: false,
   },
   comarca: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  provincia: {
     type: DataTypes.STRING,
     allowNull: false,
   },

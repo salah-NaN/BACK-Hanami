@@ -20,6 +20,7 @@ import Imagenes from "../models/Imagenes.js";
 import Resenias from "../models/Resenias.js";
 import PuntosInteres from "../models/Puntos_interes.js";
 import Flores from "../models/Flores.js";
+import Propietarios from "../models/Propietarios.js";
 
 const router = Router();
 
@@ -54,7 +55,8 @@ export default router
         Temporadas,
         PuntosInteres,
         Imagenes,
-        Resenias
+        Resenias,
+        Propietarios
       )
   )
   .get(
@@ -66,7 +68,9 @@ export default router
         Actividades,
         Temporadas,
         Flores,
-        PuntosInteres
+        PuntosInteres,
+        Resenias,
+        Imagenes
       )
   )
 
