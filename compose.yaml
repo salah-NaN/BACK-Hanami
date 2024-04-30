@@ -15,11 +15,3 @@ services:
             MYSQL_DATABASE: hanami
             MYSQL_USER: admin
             MYSQL_PASSWORD: admin
-    adminer:
-        image: adminer:latest
-        container_name: adminer
-        environment:
-            ADMINER_DEFAULT_SERVER: mysql8
-        restart: always
-        ports:
-        - 7777:8080
