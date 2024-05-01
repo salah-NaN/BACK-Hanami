@@ -14,7 +14,9 @@ import {
   puntos_interes_una_semana,
   get_images_puntos_interes,
 } from "../controllers/puntos_interes.controllers.js";
-import { Router } from "express";
+
+import { actividades_buscador } from '../controllers/actividades.controllers.js'
+import {Router} from "express";
 
 const router = Router();
 
@@ -51,12 +53,28 @@ export default router
   .get(
     "/todos_puntos_interes",
     async (req, res) =>
-      await todos_puntos_interes(req, res, PuntosInteres, Temporadas, Flores)
+      await todos_puntos_interes(
+        req,
+        res,
+        PuntosInteres,
+        Temporadas,
+        Flores,
+        Resenias
+      )
   )
   .get(
     "/puntos_interes/:poblacion/:fecha/:flor",
     async (req, res) =>
-      await puntos_interes_buscador(req, res, PuntosInteres, Temporadas, Flores)
+      await puntos_interes_buscador(
+        req,
+        res,
+        PuntosInteres,
+        Temporadas,
+        Flores,
+        Actividades,
+        Resenias,
+        Imagenes
+      )
   )
   .get(
     "/puntos_interes_propietarios/:id",
@@ -74,6 +92,7 @@ export default router
         Temporadas,
         Actividades,
         Imagenes,
+        Resenias,
         Flores
       )
   )
@@ -89,6 +108,7 @@ export default router
         Imagenes
       )
   )
+
   .get(
     "/get_images_puntos_interes/:id",
     async (req, res) => await get_images_puntos_interes(req, res, Imagenes)
@@ -104,6 +124,18 @@ export default router
 //       PuntosInteres
 //     )
 // );
+
+.get(
+  "/actividades/:poblacion/:fecha/:flor",
+  async (req, res) =>
+    await actividades_buscador(
+      req,
+      res,
+      Actividades,
+      Temporadas,
+      PuntosInteres
+    )
+);
 /*
     Endpoint para poder sacar todos los puntos de interés y todas sus temporadas 
     asociadas

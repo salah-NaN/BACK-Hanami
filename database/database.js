@@ -1,4 +1,4 @@
-import {Sequelize} from "sequelize";
+import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize("hanami", "root", "admin", {
   host: "localhost",
@@ -11,11 +11,13 @@ const sequelize = new Sequelize("hanami", "root", "admin", {
 });
 
 async function iniDB() {
-  await sequelize.sync({force: true});
+  await sequelize.sync({ force: true });
 }
 
 //iniDB();
- 
+
+
+
 sequelize
   .authenticate()
   .then(() => {

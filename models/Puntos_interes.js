@@ -5,7 +5,6 @@ import Propietarios from "./Propietarios.js";
 import Imagenes from "./Imagenes.js";
 import Temporadas from "./Temporadas.js";
 
-
 const PuntosInteres = sequelize.define("puntos_interes", {
   nombre: {
     type: DataTypes.STRING,
@@ -34,15 +33,18 @@ const PuntosInteres = sequelize.define("puntos_interes", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  provincia: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   propietario_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  }
+  },
 });
 
-
 PuntosInteres.belongsTo(Propietarios, {
-  foreignKey: "propietario_id"
-})
+  foreignKey: "propietario_id",
+});
 
 export default PuntosInteres;

@@ -6,7 +6,9 @@ const actividades_buscador = async (
   Model,
   Temporadas,
   Flores,
-  PuntosInteres
+  PuntosInteres,
+  Resenias,
+  Imagenes
 ) => {
   try {
     const poblacion = req.params.poblacion !== ";" ? req.params.poblacion : "%";
@@ -21,10 +23,20 @@ const actividades_buscador = async (
     mas1Ano.setFullYear(mas1Ano.getFullYear() + 1);
 
     const actividades_buscador = await Model.findAll({
-      where: {
-        poblacion: { [Op.like]: poblacion },
-      },
+
+      where: poblacion.includes("provincia")
+        ? { provincia: { [Op.like]: poblacion?.split(":")[1] } }
+        : poblacion.includes("poblacion")
+        ? { poblacion: { [Op.like]: poblacion?.split(":")[1] } }
+        : { poblacion: { [Op.like]: poblacion } },
       include: [
+        {
+          model: Resenias,
+          required: false,
+        },
+        {
+          model: Imagenes,
+        },
         {
           model: Temporadas,
           required: false,
@@ -83,7 +95,8 @@ const actividad_page = async (
   Temporadas,
   PuntosInteres,
   Imagenes,
-  Resenias
+  Resenias,
+  Propietarios
 ) => {
   try {
     const { id } = req.params;
@@ -94,6 +107,7 @@ const actividad_page = async (
           include: [
             {
               model: PuntosInteres,
+              include: [{ model: Propietarios }],
             },
             {
               model: Imagenes,
@@ -216,3 +230,4 @@ export {
   get_images_actividades,
   actividades_editar,
 };
+

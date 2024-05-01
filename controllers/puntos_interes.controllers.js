@@ -1,7 +1,14 @@
 import sequelize from "sequelize";
 import { Op, where } from "sequelize";
 
-const todos_puntos_interes = async (req, res, Model, Temporadas) => {
+const todos_puntos_interes = async (
+  req,
+  res,
+  Model,
+  Temporadas,
+  Flores,
+  Resenias
+) => {
   try {
     const puntos_interes = await Model.findAll({
       // where: {id: 3} // Incluye todas las temporadas asociadas a los puntos de interés
@@ -9,6 +16,7 @@ const todos_puntos_interes = async (req, res, Model, Temporadas) => {
         {
           model: Temporadas,
           required: false,
+          include: [{ model: Flores }],
         },
       ],
     });
@@ -57,10 +65,11 @@ const punto_interes_page = async (
   Temporadas,
   Actividades,
   Imagenes,
+  Resenias,
   Flores
 ) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     // consulta para sacar el Pdi sin las flores asociadas
     const puntoInteres = await Model.findByPk(id, {
       include: [
@@ -70,11 +79,11 @@ const punto_interes_page = async (
             { model: Flores },
             {
               model: Actividades,
-              include: [{model: Imagenes}],
+              include: [{ model: Imagenes }, { model: Resenias }, { model: Temporadas }],
             },
           ],
         },
-        {model: Propietarios},
+        { model: Propietarios },
         {
           model: Imagenes,
         } /*
@@ -102,13 +111,24 @@ const punto_interes_page = async (
   }
 };
 // endpoint que muestra los puntos de interes(con temporadas y las flores correspondientes) segun los parametros introducidos
-const puntos_interes_buscador = async (req, res, Model, Temporadas, Flores) => {
+const puntos_interes_buscador = async (
+  req,
+  res,
+  Model,
+  Temporadas,
+  Flores,
+  Actividades,
+  Resenias,
+  Imagenes
+) => {
   try {
     //comprueba si los parametros llegan vacios (";") y los sustituye por un "%" o si tenian datos
-    const poblacion = req.params.poblacion !== ";" ? req.params.poblacion : "%";
+    let poblacion = req.params.poblacion !== ";" ? req.params.poblacion : "%";
     const fecha =
       req.params.fecha !== ";" ? new Date(req.params.fecha) : new Date();
     const flor = req.params.flor !== ";" ? req.params.flor : "%";
+    // poblacion = req.params?.poblacion;
+    // const nombreProvinciaPoblacion = poblacion.split(":")[1];
 
     //creamos constante con la fecha que nos llega
     const condicion = req.params.fecha;
@@ -116,9 +136,15 @@ const puntos_interes_buscador = async (req, res, Model, Temporadas, Flores) => {
     //preparamos una const que es la fecha dentro de 1 año respecto el dia de hoy
     const mas1Ano = new Date();
     mas1Ano.setFullYear(mas1Ano.getFullYear() + 1);
+    console.log(poblacion);
 
     const puntos_interes_buscador = await Model.findAll({
-      where: { poblacion: { [Op.like]: poblacion } },
+      where: poblacion.includes("provincia")
+        ? { provincia: { [Op.like]: poblacion?.split(":")[1] } }
+        : poblacion.includes('poblacion')
+          ? { poblacion: { [Op.like]: poblacion?.split(":")[1] } }
+          : { poblacion: { [Op.like]: poblacion } },
+
       include: [
         {
           model: Temporadas,
@@ -127,17 +153,17 @@ const puntos_interes_buscador = async (req, res, Model, Temporadas, Flores) => {
             //miramos si lo que nos llega es un ";", que es si el usuario  ha introducido algun dato
             condicion !== ";"
               ? {
-                  [Op.and]: {
-                    fecha_inicio: { [Op.lte]: fecha },
-                    fecha_fin: { [Op.gte]: fecha },
-                  },
-                }
-              : {
-                  [Op.and]: {
-                    fecha_inicio: { [Op.gte]: fecha },
-                    fecha_fin: { [Op.lte]: mas1Ano },
-                  },
+                [Op.and]: {
+                  fecha_inicio: { [Op.lte]: fecha },
+                  fecha_fin: { [Op.gte]: fecha },
                 },
+              }
+              : {
+                [Op.and]: {
+                  fecha_inicio: { [Op.gte]: fecha },
+                  fecha_fin: { [Op.lte]: mas1Ano },
+                },
+              },
           include: [
             {
               model: Flores,
@@ -146,7 +172,14 @@ const puntos_interes_buscador = async (req, res, Model, Temporadas, Flores) => {
                 especie: { [Op.like]: flor },
               },
             },
+            {
+              model: Actividades,
+              include: [{ model: Imagenes }, { model: Resenias }],
+            },
           ],
+        },
+        {
+          model: Imagenes,
         },
       ],
     });
