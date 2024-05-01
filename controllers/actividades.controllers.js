@@ -1,4 +1,3 @@
-import Resenias from "../models/Resenias.js";
 import { Op, where } from "sequelize";
 
 const actividades_buscador = async (
@@ -139,60 +138,96 @@ const actividad_page = async (
   }
 };
 
-const actividades_punto_interes = async (req, res, Model, Temporada, Imagenes, Actividades) => {
-  try{
-    const {id} = req.params;
+const actividades_punto_interes = async (
+  req,
+  res,
+  Model,
+  Temporada,
+  Imagenes,
+  Actividades
+) => {
+  try {
+    const { id } = req.params;
     const punto_interes = await Model.findByPk(id, {
-      
       include: [
         {
           model: Temporada,
           include: [
             {
-              model: Imagenes
+              model: Imagenes,
             },
             {
-              model: Actividades
-            }
-          ]
+              model: Actividades,
+            },
+          ],
         },
-      ]
+      ],
     });
     if (!punto_interes) {
-      return res.status(404).json({message: "No se encontraron puntos de interés"});
+      return res
+        .status(404)
+        .json({ message: "No se encontraron puntos de interés" });
     }
     res.status(200).json(punto_interes.temporadas);
-  }catch(error){
-    res.status(400).json({error: error.message});
-    
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
-}
-const actividades_editar = async (req, res, Model, Temporada, Imagenes, Actividades) => {
-  try{
-    const {id} = req.params;
+};
+const actividades_editar = async (
+  req,
+  res,
+  Model,
+  Temporada,
+  Imagenes,
+  Actividades
+) => {
+  try {
+    const { id } = req.params;
     const punto_interes = await Model.findByPk(id, {
-      
       include: [
         {
           model: Temporada,
           include: [
             {
-              model: Imagenes
+              model: Imagenes,
             },
             {
-              model: Actividades
-            }
-          ]
+              model: Actividades,
+            },
+          ],
         },
-      ]
+      ],
     });
     if (!punto_interes) {
-      return res.status(404).json({message: "No se encontraron puntos de interés"});
+      return res
+        .status(404)
+        .json({ message: "No se encontraron puntos de interés" });
     }
     res.status(200).json(punto_interes.temporadas);
-  }catch(error){
-    res.status(400).json({error: error.message});
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
-}
-export {actividades_buscador, actividad_page, actividades_punto_interes, actividades_editar};
+};
+
+const get_images_actividades = async (req, res, Model) => {
+  try {
+    const images = await Model.findAll({
+      where: { actividad_id: req.params.id }
+    });
+
+    if (!images) {
+      return res.status(404).json({ message: "No se encontraron imagenes" });
+    }
+    res.status(200).json(images);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+export {
+  actividades_buscador,
+  actividad_page,
+  actividades_punto_interes,
+  get_images_actividades,
+  actividades_editar,
+};
 

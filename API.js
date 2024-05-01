@@ -11,6 +11,10 @@ import reseniasRoutes from "./routes/resenias.routes.js";
 import temporadasRoutes from "./routes/temporadas.routes.js";
 import floresRoutes from "./routes/flores.routes.js";
 import imagenesRoutes from "./routes/imagenes.routes.js";
+import multer from "multer";
+import path from "path";
+
+
 
 // constantes
 const PORT = 3000;
@@ -33,6 +37,7 @@ app.use("/api", reseniasRoutes);
 app.use("/api", temporadasRoutes);
 app.use("/api", floresRoutes);
 app.use("/api", imagenesRoutes);
+
 
 // iniciar servidor
 app.listen(PORT, () => {

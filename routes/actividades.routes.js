@@ -9,7 +9,8 @@ import {
   actividad_page,
   actividades_buscador,
   actividades_punto_interes,
-  actividades_editar
+  actividades_editar,
+  get_images_actividades,
 } from "../controllers/actividades.controllers.js";
 import { Router } from "express";
 import checkToken from "../middleware/checkToken.js";
@@ -83,6 +84,10 @@ export default router
         PuntosInteres,
         Temporadas,
         Imagenes,
-        Actividades,
+        Actividades
       )
+  )
+  .get(
+    "/get_images_actividades/:id",
+    async (req, res) => await get_images_actividades(req, res, Imagenes)
   );

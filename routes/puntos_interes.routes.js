@@ -12,6 +12,7 @@ import {
   punto_interes_page,
   puntos_interes_propietarios,
   puntos_interes_una_semana,
+  get_images_puntos_interes,
 } from "../controllers/puntos_interes.controllers.js";
 
 import { actividades_buscador } from '../controllers/actividades.controllers.js'
@@ -107,6 +108,23 @@ export default router
         Imagenes
       )
   )
+
+  .get(
+    "/get_images_puntos_interes/:id",
+    async (req, res) => await get_images_puntos_interes(req, res, Imagenes)
+  );
+// .get(
+//   "/actividades/:poblacion/:fecha/:flor",
+//   async (req, res) =>
+//     await actividades_buscador(
+//       req,
+//       res,
+//       Actividades,
+//       Temporadas,
+//       PuntosInteres
+//     )
+// );
+
 .get(
   "/actividades/:poblacion/:fecha/:flor",
   async (req, res) =>

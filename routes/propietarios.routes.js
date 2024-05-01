@@ -22,6 +22,10 @@ Propietarios.beforeCreate(async (propietario) => {
   const codedPassword = await bcrypt.hash(propietario.password, 10);
   propietario.password = codedPassword;
 });
+Propietarios.beforeUpdate(async (propietario) => {
+  const codedPassword = await bcrypt.hash(propietario.password, 10);
+  propietario.password = codedPassword;
+})
 
 export default router
   .get(
