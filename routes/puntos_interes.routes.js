@@ -112,7 +112,7 @@ export default router
   .get(
     "/get_images_puntos_interes/:id",
     async (req, res) => await get_images_puntos_interes(req, res, Imagenes)
-  );
+  )
 // .get(
 //   "/actividades/:poblacion/:fecha/:flor",
 //   async (req, res) =>
